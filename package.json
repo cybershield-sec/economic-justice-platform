@@ -1,0 +1,38 @@
+{
+  "name": "economic-justice-platform",
+  "version": "1.0.0",
+  "description": "Revolutionary platform for economic justice organizing",
+  "scripts": {
+    "start": "./cpp-server",
+    "serve": "npx serve .",
+    "cpp:build": "make",
+    "cpp:run": "make run",
+    "cpp:clean": "make clean",
+    "cpp:server": "./cpp-server",
+    "cpp:edit": "echo 'Open http://localhost:8000/edit in your browser to access the C++ ASM editor'",
+    "deploy": "surge . economic-justice-platform.surge.sh",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:start": "cd backend && npm start",
+    "backend:test": "cd backend && npm test",
+    "backend:build": "cd backend && npm run build",
+    "docker:up": "cd backend && docker-compose up -d",
+    "docker:down": "cd backend && docker-compose down",
+    "test:backend": "cd backend && node test-server.js",
+    "compress": "./compress-deploy.sh",
+    "full-deploy": "npm run compress && echo 'Deployment package created - upload to your server'"
+  },
+  "keywords": [
+    "economic-justice",
+    "organizing",
+    "storytelling",
+    "human-ai-collaboration"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0"
+  }
+}

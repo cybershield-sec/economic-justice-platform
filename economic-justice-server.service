@@ -1,0 +1,27 @@
+[Unit]
+Description=Economic Justice Platform C++ ASM Server
+After=network.target
+
+[Service]
+Type=simple
+User=cybersage
+WorkingDirectory=/home/cybersage/Revolution/economic-justice-platform
+ExecStart=/home/cybersage/Revolution/economic-justice-platform/cpp-server
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=economic-justice-server
+
+# Security enhancements
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+
+# Resource limits
+MemoryMax=512M
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target

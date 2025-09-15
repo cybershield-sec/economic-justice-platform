@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Tally Sovereignty">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="manifest" href="/manifest.json">
+    <title>The King's Reckoning - A Parable for Our Times</title>
+    <meta name="description" content="A powerful parable about power, money, and justice that reveals how monetary systems can become tools of oppression.">
+    <meta name="keywords" content="parable, economics, social justice, monetary policy, power, inequality">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: url('../prompts/background1.png') center/cover no-repeat;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .controls {
+            background: rgba(52, 73, 94, 0.1);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(52, 73, 94, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+        }
+
+        .btn.accent {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .content {
+            padding: 3rem;
+            animation: fadeIn 1.5s ease-out 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .paragraph {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            text-align: justify;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: paragraphFadeIn 0.8s ease-out forwards;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .paragraph:hover {
+            border-left-color: #3498db;
+            background: rgba(52, 152, 219, 0.05);
+            padding-left: 2rem;
+        }
+
+        .paragraph:nth-child(1) { animation-delay: 0.1s; }
+        .paragraph:nth-child(2) { animation-delay: 0.2s; }
+        .paragraph:nth-child(3) { animation-delay: 0.3s; }
+        .paragraph:nth-child(4) { animation-delay: 0.4s; }
+        .paragraph:nth-child(5) { animation-delay: 0.5s; }
+        .paragraph:nth-child(6) { animation-delay: 0.6s; }
+        .paragraph:nth-child(7) { animation-delay: 0.7s; }
+        .paragraph:nth-child(8) { animation-delay: 0.8s; }
+        .paragraph:nth-child(9) { animation-delay: 0.9s; }
+        .paragraph:nth-child(10) { animation-delay: 1.0s; }
+        .paragraph:nth-child(n+11) { animation-delay: 1.1s; }
+
+        @keyframes paragraphFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 193, 7, 0.3) 0%, rgba(255, 193, 7, 0.1) 100%);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .share-section {
+            margin-top: 1.5rem;
+        }
+
+        .share-text {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .twitter { background: #1da1f2; }
+        .facebook { background: #4267b2; }
+        .reddit { background: #ff4500; }
+        .linkedin { background: #0077b5; }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .tally-stick {
+            display: inline-block;
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 0 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            cursor: help;
+            title: "Tally Stick - Symbol of the King's Control";
+        }
+
+        .quote {
+            font-style: italic;
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                border-radius: 15px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+
+            .header {
+                padding: 2rem 1.5rem;
+            }
+
+            .controls {
+                padding: 1rem;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        .audio-controls {
+            background: rgba(52, 73, 94, 0.05);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .speed-control {
+            margin: 0.5rem;
+        }
+
+        .speed-control select {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .currently-reading {
+            background: rgba(231, 76, 60, 0.1) !important;
+            border-left-color: #e74c3c !important;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">The King's Reckoning</h1>
+            <p class="subtitle">A Parable of Power, Money, and Justice</p>
+            <div class="tally-counter" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; backdrop-filter: blur(10px);">
+                <span id="userTally">👑 Your Tally: 1</span>
+                <span id="networkTally" style="margin-left: 15px;">🌐 Network Tally: 1</span>
+            </div>
+
+            <nav class="global-nav" style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="index.html" class="nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">📖 Story</a>
+                <a href="economic-justice-resources.html" class="nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">📚 Resources</a>
+                <a href="story-platform.html" class="nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">✍️ Share Story</a>
+                <a href="multi-agent-chat.html" class="nav-btn" style="background: rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">💬 The Commons</a>
+            </nav>
+        </header>
+
+        <div class="controls">
+            <button class="btn" onclick="toggleAudio()" id="audioBtn">🔊 Read Aloud</button>
+            <button class="btn secondary" onclick="toggleDarkMode()" id="darkModeBtn">🌙 Dark Mode</button>
+            <button class="btn secondary" onclick="increaseFontSize()">A+</button>
+            <button class="btn secondary" onclick="decreaseFontSize()">A-</button>
+            <button class="btn accent" onclick="shareStory()">📢 Share Story</button>
+        </div>
+
+        <div class="audio-controls" id="audioControls" style="display: none;">
+            <div class="speed-control">
+                Reading Speed:
+                <select id="speedControl" onchange="changeSpeed()">
+                    <option value="0.5">0.5x</option>
+                    <option value="0.75">0.75x</option>
+                    <option value="1" selected>1x</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                </select>
+            </div>
+            <button class="btn" onclick="pauseResume()" id="pauseBtn">⏸️ Pause</button>
+            <button class="btn secondary" onclick="stopReading()">⏹️ Stop</button>
+        </div>
+
+        <main class="content" id="storyContent">
+            <p class="paragraph">In a realm not so different from our own, lived a King who, once a year, would summon his people to the grand square. With a gnarled wooden staff in hand – the Royal <span class="tally-stick">Tally</span> – he would make his pronouncements.</p>
+
+            <p class="paragraph">On one such occasion, the King approached three peasants standing nervously at the front. To the first, a stoic farmer, he declared, <span class="quote">"You shall provide a tenth of your harvest to the royal granaries."</span> He then broke off a piece of his staff, a unique, jagged shard, and handed it to the farmer. <span class="quote">"This is your <span class="tally-stick">tally</span>. Match it to mine when the time comes."</span></p>
+
+            <p class="paragraph">He moved to the second, a weaver. <span class="quote">"Your looms shall produce the finest silks for the royal court."</span> Another piece of the staff was broken and given. And to the third, a strong stonemason, <span class="quote">"You will lend your strength to the new tower."</span> A third <span class="tally-stick">tally stick</span> exchanged hands. One by one, others stepped forward – a baker, a blacksmith, a herder – each receiving a demand and their portion of the King's <span class="tally-stick">Tally</span>. These sticks, they were told, were proof of their obligation and, intriguingly, could be presented to the King's scribes to settle their dues.</p>
+
+            <p class="paragraph">Soon, the marketplace buzzed. The farmer, needing new tools before his harvest was ready, traded his <span class="tally-stick">tally stick</span> to the blacksmith for a sturdy plough. The weaver, whose silks wouldn't be ready for months, exchanged her stick with the baker for bread to feed her family. <span class="highlight">The tally sticks began to circulate, acting as promises, as markers of value, as a rudimentary form of currency.</span> A farmer's daughter, young Anna, watched with wide eyes as these curious wooden pieces flowed from hand to hand. <a href="economic-justice-resources.html#monetary-reform" class="learn-more" style="color: #e74c3c; text-decoration: none; font-weight: bold; margin-left: 5px;" title="Learn about modern monetary reform">💡 Learn More</a></p>
+
+            <p class="paragraph">As the year waned, some, through shrewd trades or fortunate circumstances, accumulated many <span class="tally-stick">tally sticks</span>. Others, less fortunate or perhaps less adept at the new game of exchange, found themselves with few, or even none. Anna's own family, hardworking farmers, had managed to acquire just enough sticks to cover their harvest tithe, but their neighbors, the Millers, whose child was Anna's closest friend, had fallen on hard times. A blight had struck their small plot, and they had no sticks to their name.</p>
+
+            <p class="paragraph">Then came <span class="highlight">the day of reckoning</span>. The King's tax collectors arrived, demanding the return of the <span class="tally-stick">tally sticks</span>. Those who presented their matched pieces were cleared of their dues. But the Millers, and others like them, stood empty-handed. Their fate was harsh: a year of unpaid labor in the King's mines to settle their debt. Anna saw the despair in her friend's eyes as his parents were led away. <a href="economic-justice-resources.html#economic-justice" class="learn-more" style="color: #e74c3c; text-decoration: none; font-weight: bold; margin-left: 5px;" title="Learn about economic justice organizations">⚖️ Take Action</a></p>
+
+            <p class="paragraph">The shopkeepers, the skilled artisans, those who had a comfortable number of sticks but were not extravagantly wealthy – watched with growing unease. They saw the desperation of the poor and the ever-increasing opulence of the King and his favored courtiers, who seemed to have an endless supply of sticks. <span class="highlight">Resentment began to simmer.</span> They weren't poor, not yet, but they saw how easily one could fall.</p>
+
+            <p class="paragraph">The King, meanwhile, had a dilemma. He wished to build a grand new palace, but the <span class="tally-stick">tally sticks</span> collected as taxes were only enough to cover existing expenses. So, he simply fashioned new <span class="tally-stick">tally sticks</span>, identical to the originals, and paid the builders with these. Suddenly, there were more sticks in circulation, but the amount of goods and services remained the same. <span class="highlight">The price of bread rose, then the price of cloth. The sticks in people's hands bought less and less. This was inflation, though they had no name for it.</span> <a href="economic-justice-resources.html#educational-resources" class="learn-more" style="color: #e74c3c; text-decoration: none; font-weight: bold; margin-left: 5px;" title="Learn about monetary systems">📊 Understand</a></p>
+
+            <p class="paragraph">At other times, fearing unrest, the King would collect the taxes and then, instead of spending them, would store vast quantities of sticks in his vaults, or even burn them. With fewer sticks in circulation, their value soared. Those who had hoarded sticks became richer, while those who needed to buy essentials found their few sticks bought almost nothing. <span class="highlight">This was deflation, equally disruptive.</span></p>
+
+            <p class="paragraph">Anna, now a thoughtful young woman, had never forgotten her friend's plight. One day, while exploring an abandoned section of the old city walls, she stumbled upon a hidden chamber. Inside, gleaming in the dim light, was a massive chest overflowing with forgotten <span class="tally-stick">tally sticks</span> – hundreds of them, perhaps left by a disgraced merchant long ago. A plan began to form in her mind, a daring plan to challenge the King's arbitrary power.</p>
+
+            <p class="paragraph">Her first act was quiet. She used a portion of the sticks to buy food and medicine for the poorest families, those like the Millers had been. She didn't reveal her identity, but whispers started of a secret benefactor. <span class="highlight">Trust and hope began to grow in the downtrodden corners of the kingdom.</span></p>
+
+            <p class="paragraph">Emboldened, Anna, cloaked and disguised, sought an audience with the King. She proposed a deal: a significant portion of her newfound "wealth" in exchange for fairer tax laws and the release of those forced into labor. The King, intrigued by the prospect of so many sticks, feigned agreement. He took a hefty sum as a "good faith" deposit. But days later, not only were the laws unchanged, but the King's guards began a crackdown, arresting anyone who spoke of reform. <span class="highlight">The King had betrayed her.</span></p>
+
+            <p class="paragraph">The news of the King's treachery, spread by Anna's allies, was the spark. The poorest, already empowered by her anonymous aid, were ready. The shopkeepers, who had recently been hit with a new, crippling "Prosperity Tax" by the King to fund his increasingly lavish lifestyle and pay his growing army, saw their livelihoods threatened. <span class="highlight">They realized their interests now lay with the oppressed, not the oppressor.</span></p>
+
+            <p class="paragraph">The King, sensing the shift, ordered his soldiers to quell any dissent. Officers, many of whom came from the very villages now suffering, were torn. Some followed orders, their actions becoming more brutal, further inflaming the populace. Others hesitated, their loyalty wavering. Anna and her growing band of rebels reached out to these officers, speaking of justice, of a kingdom where the King served the people, not the other way around.</p>
+
+            <p class="paragraph">The unrest boiled over. Fueled by desperation and a shared vision of a fairer world, the peasants, the shopkeepers, and even a few sympathetic soldiers, stormed the castle. The fighting was brief but fierce. They reached the throne room, where the King stood, no longer regal, but a frightened man.</p>
+
+            <p class="paragraph">The crowd fell silent. Here was the architect of their suffering. Here was the man who held the other halves of their broken <span class="tally-stick">tally sticks</span>, the symbols of their broken system. What now? Some yelled for his immediate execution. Others called for a trial. A few, Anna among them, wondered if simply removing him was enough. <span class="highlight">How could they build a new system, one where the "tally sticks" – the very essence of their economy and governance – served everyone, not just a new king or a new elite?</span></p>
+
+            <p class="paragraph">The choice hung heavy in the air, a decision that would shape their future. The path ahead was uncertain, filled with the complex challenge of dismantling an unjust system. Yet, a fragile hope flickered in the eyes of many, a belief that, together, they could build something more equitable. <span class="highlight">A better world, they dared to whisper, was possible.</span></p>
+        </main>
+
+        <footer class="footer">
+            <div class="share-section">
+                <div class="share-text">📖 <strong>This story needs to be shared.</strong> Help spread this parable about how money and power really work.</div>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn twitter" onclick="shareOnTwitter()">🐦 Tweet This</a>
+                    <a href="#" class="social-btn facebook" onclick="shareOnFacebook()">📘 Share</a>
+                    <a href="#" class="social-btn reddit" onclick="shareOnReddit()">🤖 Reddit</a>
+                    <a href="#" class="social-btn linkedin" onclick="shareOnLinkedIn()">💼 LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="engagement-section" style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <h3 style="color: white; margin-bottom: 1rem;">Continue Your Journey</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="economic-justice-resources.html" class="btn" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">📚 Explore Resources</a>
+                    <a href="story-platform.html" class="btn" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">✍️ Share Your Story</a>
+                    <a href="multi-agent-chat.html" class="btn" style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);">💬 Join Discussion</a>
+                </div>
+                <p style="color: rgba(255,255,255,0.8); margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                    What would you do in Anna's position? How does this story reflect modern economic systems? <br>
+                    Join the conversation in The Commons to discuss with others and AI agents.
+                </p>
+            </div>
+
+            <div style="margin-top: 2rem; opacity: 0.8; font-size: 0.9rem;">
+                <em>"The King's Reckoning"</em> - A Parable for Our Times
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Reading progress
+        window.addEventListener('scroll', updateReadingProgress);
+
+        function updateReadingProgress() {
+            const content = document.getElementById('storyContent');
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+
+            document.getElementById('readingProgress').style.width = scrollPercent + '%';
+        }
+
+        // Text-to-speech functionality
+        let speech = null;
+        let isReading = false;
+        let isPaused = false;
+        let currentParagraphIndex = 0;
+
+        function toggleAudio() {
+            if (isReading) {
+                stopReading();
+            } else {
+                startReading();
+            }
+        }
+
+        function startReading() {
+            if (!('speechSynthesis' in window)) {
+                alert('Sorry, your browser does not support text-to-speech.');
+                return;
+            }
+
+            const paragraphs = document.querySelectorAll('.paragraph');
+            if (currentParagraphIndex >= paragraphs.length) {
+                currentParagraphIndex = 0;
+            }
+
+            isReading = true;
+            document.getElementById('audioBtn').innerHTML = '🔇 Stop Reading';
+            document.getElementById('audioControls').style.display = 'block';
+
+            readNextParagraph();
+        }
+
+        function readNextParagraph() {
+            const paragraphs = document.querySelectorAll('.paragraph');
+
+            if (currentParagraphIndex < paragraphs.length && isReading) {
+                // Highlight current paragraph
+                paragraphs.forEach(p => p.classList.remove('currently-reading'));
+                paragraphs[currentParagraphIndex].classList.add('currently-reading');
+
+                // Scroll to current paragraph
+                paragraphs[currentParagraphIndex].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                const text = paragraphs[currentParagraphIndex].textContent;
+                speech = new SpeechSynthesisUtterance(text);
+                speech.rate = parseFloat(document.getElementById('speedControl').value);
+                speech.pitch = 1;
+                speech.volume = 1;
+
+                speech.onend = function() {
+                    paragraphs[currentParagraphIndex].classList.remove('currently-reading');
+                    currentParagraphIndex++;
+                    if (currentParagraphIndex < paragraphs.length && isReading) {
+                        setTimeout(readNextParagraph, 500);
+                    } else {
+                        stopReading();
+                    }
+                };
+
+                speechSynthesis.speak(speech);
+            }
+        }
+
+        function pauseResume() {
+            if (speechSynthesis.paused) {
+                speechSynthesis.resume();
+                document.getElementById('pauseBtn').innerHTML = '⏸️ Pause';
+                isPaused = false;
+            } else {
+                speechSynthesis.pause();
+                document.getElementById('pauseBtn').innerHTML = '▶️ Resume';
+                isPaused = true;
+            }
+        }
+
+        function stopReading() {
+            isReading = false;
+            isPaused = false;
+            speechSynthesis.cancel();
+            document.getElementById('audioBtn').innerHTML = '🔊 Read Aloud';
+            document.getElementById('audioControls').style.display = 'none';
+            document.getElementById('pauseBtn').innerHTML = '⏸️ Pause';
+
+            // Remove highlighting
+            document.querySelectorAll('.paragraph').forEach(p => p.classList.remove('currently-reading'));
+            currentParagraphIndex = 0;
+        }
+
+        function changeSpeed() {
+            if (speech) {
+                speech.rate = parseFloat(document.getElementById('speedControl').value);
+            }
+        }
+
+        // Font size controls
+        let currentFontSize = 1.1;
+
+        function increaseFontSize() {
+            currentFontSize += 0.1;
+            document.querySelectorAll('.paragraph').forEach(p => {
+                p.style.fontSize = currentFontSize + 'rem';
+            });
+        }
+
+        function decreaseFontSize() {
+            if (currentFontSize > 0.8) {
+                currentFontSize -= 0.1;
+                document.querySelectorAll('.paragraph').forEach(p => {
+                    p.style.fontSize = currentFontSize + 'rem';
+                });
+            }
+        }
+
+        // Dark mode toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const container = document.querySelector('.container');
+
+            if (body.style.background.includes('667eea')) {
+                body.style.background = 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)';
+                container.style.background = 'rgba(44, 62, 80, 0.95)';
+                container.style.color = '#ecf0f1';
+                document.getElementById('darkModeBtn').innerHTML = '☀️ Light Mode';
+            } else {
+                body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                container.style.background = 'rgba(255, 255, 255, 0.95)';
+                container.style.color = '#2c3e50';
+                document.getElementById('darkModeBtn').innerHTML = '🌙 Dark Mode';
+            }
+        }
+
+        // Share functions
+        function shareStory() {
+            // Navigate to story platform - this will work when served via HTTP server
+            // For local file usage, we need to handle it differently due to browser security
+            try {
+                window.location.href = 'story-platform.html';
+            } catch (e) {
+                // Fallback for local file usage - open in new tab/window
+                window.open('story-platform.html', '_blank');
+            }
+
+            // Also offer social sharing of current story
+            if (navigator.share) {
+                navigator.share({
+                    title: 'The King\'s Reckoning - A Parable for Our Times',
+                    text: 'A powerful story about how monetary systems can become tools of oppression. This parable reveals truths about power, money, and justice that everyone should understand.',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback to copying URL
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Story link copied to clipboard! Share it with others.');
+                });
+            }
+        }
+
+        function shareOnTwitter() {
+            const text = encodeURIComponent('Just read "The King\'s Reckoning" - a powerful parable about how money and power really work. Everyone needs to read this story about economic justice! 📖⚖️');
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+
+        function shareOnFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+
+        function shareOnReddit() {
+            const title = encodeURIComponent('The King\'s Reckoning - A Parable About Money, Power, and Justice');
+            window.open(`https://reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${title}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+[Unit]
+Description=Economic Justice Platform Development Server
+After=network.target tailscale.service
+Wants=tailscale.service
+
+[Service]
+Type=simple
+User=cybersage
+Group=cybersage
+WorkingDirectory=/home/cybersage/Revolution/economic-justice-platform
+ExecStart=/usr/bin/python3 /home/cybersage/Revolution/economic-justice-platform/tailscale-server.py
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=5
+
+# Environment variables
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=PYTHONUNBUFFERED=1
+
+# Security
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=economic-justice
+
+[Install]
+WantedBy=multi-user.target

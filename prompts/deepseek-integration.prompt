@@ -1,0 +1,104 @@
+Configure DeepSeek AI integration for the Economic Justice Platform:
+
+INTEGRATION GOALS:
+1. AI-powered story analysis and categorization
+2. Intelligent resource recommendations
+3. Community sentiment analysis
+4. Content moderation assistance
+5. Personalized user guidance
+
+API CONFIGURATION PROMPT:
+"Create a comprehensive configuration for DeepSeek API integration including:
+
+AUTHENTICATION:
+- API key management
+- Rate limiting configuration
+- Error handling procedures
+- Fallback mechanisms
+
+ENDPOINT CONFIGURATION:
+- Story analysis endpoint
+- Content recommendation engine
+- Sentiment analysis service
+- Moderation assistance
+- User guidance system
+
+PROMPT TEMPLATES:
+
+1. STORY ANALYSIS PROMPT:
+"Analyze this user-submitted story for:
+- Key economic justice themes present
+- Emotional tone and sentiment
+- Potential community connections
+- Resource recommendations
+- Content moderation flags
+
+Return structured JSON response with analysis results."
+
+2. RESOURCE RECOMMENDATION PROMPT:
+"Based on user profile and story content, recommend:
+- Relevant educational resources
+- Community organizations
+- Advocacy opportunities
+- Support services
+- Further learning paths
+
+Prioritize local and actionable resources."
+
+3. SENTIMENT ANALYSIS PROMPT:
+"Analyze community sentiment across stories and comments:
+- Overall emotional tone
+- Common themes and concerns
+- Emerging issues
+- Community strengths
+- Areas needing support
+
+Provide aggregate insights for community management."
+
+4. CONTENT MODERATION PROMPT:
+"Review content for compliance with community guidelines:
+- Hate speech detection
+- Personal attacks
+- Spam identification
+- Privacy concerns
+- Constructive criticism vs. harmful comments
+
+Flag content needing human review with confidence scores."
+
+5. USER GUIDANCE PROMPT:
+"Provide personalized guidance to users based on their:
+- Story content and themes
+- Engagement patterns
+- Expressed interests
+- Community interactions
+- Learning journey
+
+Offer supportive, actionable suggestions for next steps."
+
+TECHNICAL REQUIREMENTS:
+- Response format: JSON with consistent schema
+- Error handling: Graceful degradation when API unavailable
+- Caching: Appropriate caching strategies for different endpoints
+- Logging: Comprehensive logging for debugging and improvement
+- Monitoring: Performance metrics and usage tracking
+
+SECURITY CONSIDERATIONS:
+- API key rotation procedures
+- Data privacy compliance
+- User consent for AI analysis
+- Transparency about AI usage
+- Opt-out mechanisms
+
+DEPLOYMENT CONFIG:
+- Environment-specific API keys
+- Rate limit management
+- Retry strategies
+- Fallback content when AI unavailable
+- A/B testing framework for prompt improvements
+
+DOCUMENTATION:
+- API integration guide
+- Prompt engineering documentation
+- Error code reference
+- Best practices for AI integration
+- User communication templates about AI features"

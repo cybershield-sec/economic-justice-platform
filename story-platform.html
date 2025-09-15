@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Story - Economic Justice Community</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: url('../prompts/background2.png') center/cover no-repeat;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="global-nav" style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="index.html" class="nav-btn" style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">📖 Story</a>
+            <a href="economic-justice-resources.html" class="nav-btn" style="background: #e74c3c; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">📚 Resources</a>
+            <a href="story-platform.html" class="nav-btn" style="background: #9b59b6; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">✍️ Share Story</a>
+            <a href="multi-agent-chat.html" class="nav-btn" style="background: #e67e22; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">💬 The Commons</a>
+        </nav>
+
+        <h1>Share Your Economic Justice Story</h1>
+
+        <div style="background: rgba(52, 152, 219, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #9b59b6;">
+            <p><strong>Inspired by "The King's Reckoning"?</strong> Share your own story of economic struggle, resistance, or community organizing.</p>
+            <p>Every voice matters in building a more just economy. Your story could inspire others to take action.</p>
+            <a href="index.html" style="color: #e74c3c; font-weight: bold; margin-right: 1rem;">📖 Read the original story</a>
+            <a href="economic-justice-resources.html" style="color: #27ae60; font-weight: bold;">📚 Find organizations to support</a>
+        </div>
+
+        <p>This platform is for sharing stories about economic justice and community empowerment.</p>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Story - The King's Reckoning Community</title>
+    <meta name="description" content="Share your own story of economic struggle or resistance. Every voice matters in building a more just economy.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            padding: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        .story-feed {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            max-height: calc(100vh - 250px);
+        }
+
+        .creation-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, rgba(255,255,255,1), rgba(248,249,250,1));
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .story-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .story-meta {
+            flex: 1;
+        }
+
+        .story-author {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.2rem;
+        }
+
+        .story-time {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .story-type {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .type-struggle {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+
+        .type-resistance {
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+        }
+
+        .type-solution {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+
+        .story-content {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .story-media {
+            margin: 1rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .story-media img, .story-media video, .story-media audio {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .story-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .action-btn:hover {
+            color: #3498db;
+        }
+
+        .action-btn.liked {
+            color: #e74c3c;
+        }
+
+        .create-section {
+            margin-bottom: 2rem;
+        }
+
+        .create-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .story-type-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .type-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .type-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .type-btn:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .media-type-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .media-btn {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .media-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .media-btn:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .media-btn .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .creation-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 200px;
+        }
+
+        .text-input {
+            width: 100%;
+            min-height: 120px;
+            border: none;
+            background: transparent;
+            font-family: Georgia, serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+        }
+
+        .text-input::placeholder {
+            color: #adb5bd;
+            font-style: italic;
+        }
+
+        .media-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-upload:hover {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .media-upload.dragover {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .recording-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .record-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .record-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .record-btn.recording {
+            background: #e74c3c;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        .timer {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .submit-section {
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+        }
+
+        .author-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .inspiration-quote {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(52, 152, 219, 0.1));
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #e74c3c;
+            text-align: center;
+        }
+
+        .inspiration-quote p {
+            font-style: italic;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .inspiration-quote .author {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .filter-tab:hover {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .creation-panel {
+                position: static;
+                order: -1;
+            }
+
+            .media-type-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .moderation-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="javascript:history.back()" class="back-link">← Back to Story</a>
+            <h1 class="title">Share Your Story</h1>
+            <p class="subtitle">Every voice matters. Share your experience of economic struggle, resistance, or solutions. Together, we build the narrative that changes everything.</p>
+        </header>
+
+        <div class="main-content">
+            <div class="story-feed">
+                <div class="inspiration-quote">
+                    <p>"The choice hung heavy in the air, a decision that would shape their future."</p>
+                    <div class="author">- The King's Reckoning</div>
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Stories</button>
+                    <button class="filter-tab" data-filter="struggle">Struggles</button>
+                    <button class="filter-tab" data-filter="resistance">Resistance</button>
+                    <button class="filter-tab" data-filter="solution">Solutions</button>
+                </div>
+
+                <div id="stories-container">
+                    <!-- Sample stories will be loaded here -->
+                </div>
+            </div>
+
+            <div class="creation-panel">
+                <div class="create-section">
+                    <h3>Share Your Experience</h3>
+
+                    <div class="story-type-selector">
+                        <button class="type-btn active" data-type="struggle">My Struggle</button>
+                        <button class="type-btn" data-type="resistance">My Resistance</button>
+                        <button class="type-btn" data-type="solution">My Solution</button>
+                    </div>
+
+                    <div class="media-type-selector">
+                        <button class="media-btn active" data-media="text">
+                            <span class="icon">📝</span>
+                            Write
+                        </button>
+                        <button class="media-btn" data-media="audio">
+                            <span class="icon">🎤</span>
+                            Record
+                        </button>
+                        <button class="media-btn" data-media="video">
+                            <span class="icon">📹</span>
+                            Video
+                        </button>
+                    </div>
+
+                    <div class="creation-area" id="creation-area">
+                        <textarea class="text-input" id="text-input" placeholder="Share your story... How have you experienced economic injustice? What resistance have you seen or participated in? What solutions do you envision?"></textarea>
+                    </div>
+
+                    <div class="moderation-notice">
+                        📢 All stories are reviewed to ensure they contribute constructively to our community dialogue about economic justice.
+                    </div>
+
+                    <div class="submit-section">
+                        <input type="text" class="author-input" id="author-input" placeholder="Your name (or stay anonymous)">
+                        <button class="submit-btn" id="submit-btn">Share My Story</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample stories data
+        const sampleStories = [
+            {
+                id: 1,
+                author: "Maria S.",
+                time: "2 hours ago",
+                type: "struggle",
+                content: "My family lost our home in 2008. I was 16, watching my parents cry over papers they couldn't understand. The same banks that got bailed out foreclosed on us. I see Anna's story in mine - how the system protects those who already have power.",
+                likes: 23,
+                media: null
+            },
+            {
+                id: 2,
+                author: "David Chen",
+                time: "4 hours ago",
+                type: "resistance",
+                content: "Started a community land trust in our neighborhood after seeing too many families displaced by gentrification. We're literally creating our own 'tally sticks' - currency that stays in our community. 47 families now have secure housing.",
+                likes: 31,
+                media: null
+            },
+            {
+                id: 3,
+                author: "Anonymous",
+                time: "6 hours ago",
+                type: "struggle",
+                content: "Medical debt destroyed my credit and my future. $67,000 for cancer treatment, even with insurance. The 'King's scribes' are the debt collectors who call every day. How is this different from the parable?",
+                likes: 18,
+                media: null
+            },
+            {
+                id: 4,
+                author: "Rosa Martinez",
+                time: "1 day ago",
+                type: "solution",
+                content: "Our worker cooperative now employs 23 people, all with equal say in decisions. We've proven that Anna's dream is possible - we can build something that serves everyone, not just the owners of capital.",
+                likes: 45,
+                media: null
+            },
+            {
+                id: 5,
+                author: "James T.",
+                time: "2 days ago",
+                type: "resistance",
+                content: "Organized my entire warehouse to demand living wages. Management said 'that's just how the economy works.' But we read The King's Reckoning together and realized - we're the ones who make the economy work. Victory after 3 months!",
+                likes: 67,
+                media: null
+            }
+        ];
+
+        let currentMediaType = 'text';
+        let currentStoryType = 'struggle';
+        let isRecording = false;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStories();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Story type selection
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentStoryType = this.dataset.type;
+                    updatePlaceholder();
+                });
+            });
+
+            // Media type selection
+            document.querySelectorAll('.media-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.media-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentMediaType = this.dataset.media;
+                    updateCreationArea();
+                });
+            });
+
+            // Filter tabs
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    filterStories(this.dataset.filter);
+                });
+            });
+
+            // Submit button
+            document.getElementById('submit-btn').addEventListener('click', submitStory);
+        }
+
+        function updatePlaceholder() {
+            const textInput = document.getElementById('text-input');
+            const placeholders = {
+                struggle: "Share your story... How have you experienced economic injustice? What systems have failed you?",
+                resistance: "Share your story... How have you fought back? What organizing or resistance have you seen?",
+                solution: "Share your story... What solutions have you created or witnessed? How can we build better?"
+            };
+            if (textInput) {
+                textInput.placeholder = placeholders[currentStoryType];
+            }
+        }
+
+        function updateCreationArea() {
+            const creationArea = document.getElementById('creation-area');
+
+            if (currentMediaType === 'text') {
+                creationArea.innerHTML = `
+                    <textarea class="text-input" id="text-input" placeholder="Share your story..."></textarea>
+                `;
+                updatePlaceholder();
+            } else if (currentMediaType === 'audio') {
+                creationArea.innerHTML = `
+                    <div class="media-upload">
+                        <div class="recording-controls">
+                            <button class="record-btn" id="record-btn" onclick="toggleRecording()">
+                                🎤
+                            </button>
+                            <div class="timer" id="timer">00:00</div>
+                        </div>
+                        <p style="margin-top: 1rem; color: #7f8c8d;">Click to start recording your story</p>
+                        <div id="audio-preview"></div>
+                    </div>
+                `;
+            } else if (currentMediaType === 'video') {
+                creationArea.innerHTML = `
+                    <div class="media-upload" onclick="document.getElementById('video-input').click()">
+                        <input type="file" id="video-input" accept="video/*" style="display: none;" onchange="handleVideoUpload(this)">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">📹</div>
+                        <p>Click to upload a video or drag and drop</p>
+                        <p style="color: #7f8c8d; font-size: 0.9rem; margin-top: 0.5rem;">Max 100MB</p>
+                        <div id="video-preview"></div>
+                    </div>
+                `;
+                setupDragAndDrop();
+            }
+        }
+
+        function toggleRecording() {
+            if (!isRecording) {
+                startRecording();
+            } else {
+                stopRecording();
+            }
+        }
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                recordedChunks = [];
+
+                mediaRecorder.ondataavailable = function(event) {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = function() {
+                    const blob = new Blob(recordedChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(blob);
+                    const audioPreview = document.getElementById('audio-preview');
+                    audioPreview.innerHTML = `
+                        <audio controls style="width: 100%; margin-top: 1rem;">
+                            <source src="${audioUrl}" type="audio/wav">
+                        </audio>
+                    `;
+                };
+
+                mediaRecorder.start();
+                isRecording = true;
+                document.getElementById('record-btn').classList.add('recording');
+                document.getElementById('record-btn').innerHTML = '⏹️';
+                startTimer();
+
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                alert('Unable to access microphone. Please check your permissions.');
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                isRecording = false;
+                document.getElementById('record-btn').classList.remove('recording');
+                document.getElementById('record-btn').innerHTML = '🎤';
+                stopTimer();
+            }
+        }
+
+        let timerInterval;
+        let seconds = 0;
+
+        function startTimer() {
+            seconds = 0;
+            timerInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                document.getElementById('timer').textContent =
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function handleVideoUpload(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                if (file.size > 100 * 1024 * 1024) { // 100MB limit
+                    alert('File too large. Please choose a video under 100MB.');
+                    return;
+                }
+
+                const videoUrl = URL.createObjectURL(file);
+                const videoPreview = document.getElementById('video-preview');
+                videoPreview.innerHTML = `
+                    <video controls style="width: 100%; margin-top: 1rem; border-radius: 10px;">
+                        <source src="${videoUrl}" type="${file.type}">
+                    </video>
+                `;
+            }
+        }
+
+        function setupDragAndDrop() {
+            const uploadArea = document.querySelector('.media-upload');
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, () => uploadArea.classList.remove('dragover'), false);
+            });
+
+            uploadArea.addEventListener('drop', function(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                if (files.length > 0) {
+                    handleVideoUpload({files: files});
+                }
+            });
+        }
+
+        function loadStories() {
+            const container = document.getElementById('stories-container');
+            container.innerHTML = sampleStories.map(story => createStoryCard(story)).join('');
+        }
+
+        function createStoryCard(story) {
+            const typeClasses = {
+                struggle: 'type-struggle',
+                resistance: 'type-resistance',
+                solution: 'type-solution'
+            };
+
+            const typeLabels = {
+                struggle: 'My Struggle',
+                resistance: 'My Resistance',
+                solution: 'My Solution'
+            };
+
+            return `
+                <div class="story-card" data-type="${story.type}">
+                    <div class="story-type ${typeClasses[story.type]}">${typeLabels[story.type]}</div>
+                    <div class="story-header">
+                        <div class="avatar">${story.author.charAt(0).toUpperCase()}</div>
+                        <div class="story-meta">
+                            <div class="story-author">${story.author}</div>
+                            <div class="story-time">${story.time}</div>
+                        </div>
+                    </div>
+                    <div class="story-content">${story.content}</div>
+                    ${story.media ? `<div class="story-media">${story.media}</div>` : ''}
+                    <div class="story-actions">
+                        <button class="action-btn" onclick="toggleLike(${story.id})">
+                            <span id="heart-${story.id}">🤍</span> <span id="likes-${story.id}">${story.likes}</span>
+                        </button>
+                        <button class="action-btn" onclick="shareStory(${story.id})">
+                            📤 Share
+                        </button>
+                        <button class="action-btn" onclick="supportUser('${story.author}')">
+                            🤝 Connect
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterStories(filter) {
+            const stories = document.querySelectorAll('.story-card');
+            stories.forEach(story => {
+                if (filter === 'all' || story.dataset.type === filter) {
+                    story.style.display = 'block';
+                    story.style.animation = 'fadeInUp 0.5s ease-out';
+                } else {
+                    story.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleLike(storyId) {
+            const heart = document.getElementById(`heart-${storyId}`);
+            const likesCount = document.getElementById(`likes-${storyId}`);
+            const currentLikes = parseInt(likesCount.textContent);
+
+            if (heart.textContent === '🤍') {
+                heart.textContent = '❤️';
+                likesCount.textContent = currentLikes + 1;
+                heart.parentElement.classList.add('liked');
+
+                // Show appreciation message
+                showMessage('Thank you for showing solidarity! 💪', 'success');
+            } else {
+                heart.textContent = '🤍';
+                likesCount.textContent = currentLikes - 1;
+                heart.parentElement.classList.remove('liked');
+            }
+        }
+
+        function shareStory(storyId) {
+            // In a real app, this would generate a unique URL for the story
+            const story = sampleStories.find(s => s.id === storyId);
+            if (navigator.share) {
+                navigator.share({
+                    title: `A Story of Economic Justice`,
+                    text: `"${story.content.substring(0, 100)}..." - ${story.author}`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(`"${story.content}" - ${story.author}\n\nShare your story: ${window.location.href}`);
+                showMessage('Story link copied to clipboard!', 'success');
+            }
+        }
+
+        function supportUser(author) {
+            // In a real app, this could open a messaging system or connection request
+            showMessage(`Connection request sent to ${author}! Building solidarity one story at a time. 🤝`, 'success');
+        }
+
+        function submitStory() {
+            const content = getStoryContent();
+            const author = document.getElementById('author-input').value.trim() || 'Anonymous';
+
+            if (!content) {
+                showMessage('Please share your story before submitting.', 'error');
+                return;
+            }
+
+            // Create new story object
+            const newStory = {
+                id: sampleStories.length + 1,
+                author: author,
+                time: 'Just now',
+                type: currentStoryType,
+                content: content,
+                likes: 0,
+                media: null // In real app, would handle media upload
+            };
+
+            // Add to beginning of stories array
+            sampleStories.unshift(newStory);
+
+            // Reload stories
+            loadStories();
+
+            // Reset form
+            clearForm();
+
+            // Show success message
+            showMessage('Your story has been shared! Thank you for your courage in speaking out. 🙏', 'success');
+
+            // Scroll to top to see new story
+            document.querySelector('.story-feed').scrollTop = 0;
+        }
+
+        function getStoryContent() {
+            if (currentMediaType === 'text') {
+                const textInput = document.getElementById('text-input');
+                return textInput ? textInput.value.trim() : '';
+            } else if (currentMediaType === 'audio') {
+                // In real app, would return audio file reference
+                return recordedChunks.length > 0 ? '[Audio recording shared]' : '';
+            } else if (currentMediaType === 'video') {
+                const videoInput = document.getElementById('video-input');
+                return videoInput && videoInput.files.length > 0 ? '[Video shared]' : '';
+            }
+            return '';
+        }
+
+        function clearForm() {
+            // Clear text input
+            const textInput = document.getElementById('text-input');
+            if (textInput) textInput.value = '';
+
+            // Clear author input
+            document.getElementById('author-input').value = '';
+
+            // Reset to default selections
+            document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.type-btn[data-type="struggle"]').classList.add('active');
+            currentStoryType = 'struggle';
+
+            document.querySelectorAll('.media-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.media-btn[data-media="text"]').classList.add('active');
+            currentMediaType = 'text';
+
+            // Reset creation area
+            updateCreationArea();
+        }
+
+        function showMessage(text, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.message-toast');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            // Create new message
+            const message = document.createElement('div');
+            message.className = 'message-toast';
+            message.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideInRight 0.3s ease-out;
+                max-width: 300px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            `;
+            message.textContent = text;
+
+            // Add slide-in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            document.body.appendChild(message);
+
+            // Auto-remove after 4 seconds
+            setTimeout(() => {
+                message.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (message.parentNode) {
+                        message.parentNode.removeChild(message);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Add some inspirational prompts that rotate
+        const inspirationalPrompts = [
+            "Your story matters. Every voice adds to the chorus for change.",
+            "Share your truth. Others need to hear they're not alone.",
+            "Document injustice. Your experience becomes evidence for change.",
+            "Celebrate resistance. Your courage inspires others to act.",
+            "Envision solutions. Your ideas could spark the next breakthrough.",
+            "Build connection. Your story creates bridges between struggles."
+        ];
+
+        function rotatePrompts() {
+            const quote = document.querySelector('.inspiration-quote p');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                quote.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % inspirationalPrompts.length;
+                    quote.textContent = inspirationalPrompts[currentIndex];
+                    quote.style.animation = 'fadeIn 0.3s ease-out';
+                }, 300);
+            }, 8000);
+        }
+
+        // Add fade animations for prompts
+        const promptStyles = document.createElement('style');
+        promptStyles.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(promptStyles);
+
+        // Start prompt rotation when page loads
+        setTimeout(rotatePrompts, 3000);
+
+        // Add story count and impact metrics
+        function updateMetrics() {
+            const totalStories = sampleStories.length;
+            const totalLikes = sampleStories.reduce((sum, story) => sum + story.likes, 0);
+
+            // Create metrics display
+            const metricsDiv = document.createElement('div');
+            metricsDiv.style.cssText = `
+                background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(39, 174, 96, 0.1));
+                padding: 1rem;
+                border-radius: 10px;
+                margin-bottom: 2rem;
+                text-align: center;
+                border: 1px solid #e9ecef;
+            `;
+            metricsDiv.innerHTML = `
+                <div style="display: flex; justify-content: space-around; align-items: center;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #3498db;">${totalStories}</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Stories Shared</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #e74c3c;">${totalLikes}</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Hearts Given</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #27ae60;">∞</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Lives Changed</div>
+                    </div>
+                </div>
+            `;
+
+            const storiesContainer = document.getElementById('stories-container');
+            storiesContainer.insertBefore(metricsDiv, storiesContainer.firstChild);
+        }
+
+        // Update metrics after initial load
+        setTimeout(updateMetrics, 1000);
+
+        // Add keyboard shortcuts for power users
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to submit
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                submitStory();
+            }
+
+            // Esc to clear form
+            if (e.key === 'Escape') {
+                clearForm();
+            }
+        });
+
+        // Add auto-save functionality
+        let autoSaveTimer;
+        document.addEventListener('input', function(e) {
+            if (e.target.id === 'text-input') {
+                clearTimeout(autoSaveTimer);
+                autoSaveTimer = setTimeout(() => {
+                    localStorage.setItem('draft_story', e.target.value);
+                    localStorage.setItem('draft_type', currentStoryType);
+                    localStorage.setItem('draft_author', document.getElementById('author-input').value);
+                }, 1000);
+            }
+        });
+
+        // Restore draft on load
+        window.addEventListener('load', function() {
+            const draftStory = localStorage.getItem('draft_story');
+            const draftType = localStorage.getItem('draft_type');
+            const draftAuthor = localStorage.getItem('draft_author');
+
+            if (draftStory) {
+                const textInput = document.getElementById('text-input');
+                if (textInput) textInput.value = draftStory;
+
+                if (draftType) {
+                    document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelector(`[data-type="${draftType}"]`).classList.add('active');
+                    currentStoryType = draftType;
+                }
+
+                if (draftAuthor) {
+                    document.getElementById('author-input').value = draftAuthor;
+                }
+
+                showMessage('Draft restored! Your story was automatically saved.', 'success');
+            }
+        });
+
+        // Clear draft after successful submission
+        function clearDraft() {
+            localStorage.removeItem('draft_story');
+            localStorage.removeItem('draft_type');
+            localStorage.removeItem('draft_author');
+        }
+
+        // Modify submitStory to clear draft
+        const originalSubmitStory = submitStory;
+        submitStory = function() {
+            originalSubmitStory();
+            clearDraft();
+        };
+    </script>
+</body>
+</html>

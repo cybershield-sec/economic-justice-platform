@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Claude related files
+.claude/
+
+# Debian packaging
+debian/
+
+# Compressed files
+*.tar.gz
+
+# Compiled files
+*.o
+*.out
+
+# Executables
+tally-server
+cpp-server
+native-frontend
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+*.log
+
+# Server files
+server.log
+tally-server.log

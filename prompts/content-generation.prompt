@@ -1,0 +1,75 @@
+Generate educational and inspirational content for the Economic Justice Platform:
+
+CONTENT TYPES NEEDED:
+1. Educational articles about economic justice concepts
+2. Community guidelines and values statements
+3. Story prompts and writing guides
+4. Resource descriptions and summaries
+5. Welcome messages and onboarding content
+6. Generated audio narations that speak and read the paragraphs as attention hovers over it. It will continue to play if the tally button links are opened. They opeh in a new instanec.
+
+TONE AND STYLE:
+- Accessible and inclusive language
+- Hopeful but realistic about challenges
+- Empowering and action-oriented
+- Respectful of diverse experiences
+- Clear and straightforward
+
+PROMPT 1: ECONOMIC JUSTICE 101 ARTICLE
+"Write a beginner-friendly article explaining economic justice. Cover:
+- Basic definition and principles
+- Why economic justice matters
+- Historical context (brief)
+- Key issues today
+- How individuals can get involved
+
+Keep it under 800 words, use simple language, include relatable examples. Avoid academic jargon."
+
+PROMPT 2: COMMUNITY GUIDELINES
+"Create community guidelines for our platform that emphasize:
+- Respectful dialogue across differences
+- Story sharing without judgment
+- Privacy and consent
+- Constructive criticism
+- Collective learning
+
+Make them positive and inviting rather than restrictive. Include examples of good community behavior."
+
+PROMPT 3: STORY PROMPTS
+"Generate 10 story prompts to help users share their economic justice experiences:
+- Prompts about personal economic journeys
+- Community support stories
+- Systemic challenge experiences
+- Hope and resilience narratives
+- Calls to action and change-making
+
+Make prompts open-ended and inclusive of diverse experiences."
+
+PROMPT 4: RESOURCE DESCRIPTIONS
+"Write clear, engaging descriptions for economic justice resources:
+- Educational materials
+- Community organizations
+- Advocacy groups
+- Support services
+- Research and data sources
+
+Focus on how each resource helps users and why it matters."
+3
+PROMPT 5: WELCOME MESSAGES
+"Create warm welcome messages for different user scenarios:
+- New user registration
+- First story submission
+- Community introduction
+- Resource discovery
+- Achievement recognition
+
+Make users feel seen, valued, and part of the community."
+
+FORMATTING REQUIREMENTS:
+- Goal of encrypting and distributing on our network of peers
+- Include section headers
+- Public Static Version hosted on port 80 HTML
+- Private hosted editited with tally appC
+- Bullet points for readability
+- Emphasis for key points
+- Consistent tone throughout
