@@ -362,6 +362,10 @@
             <button class="btn secondary" onclick="increaseFontSize()">A+</button>
             <button class="btn secondary" onclick="decreaseFontSize()">A-</button>
             <button class="btn accent" onclick="shareStory()">📢 Share Story</button>
+
+            <!-- Tally Revolution Controls -->
+            <button class="btn tally-btn" onclick="participateInRevolution()" style="background: rgba(231, 76, 60, 0.8); color: white;">⚡ Join Revolution</button>
+            <button class="btn tally-btn" onclick="contributeToCommons()" style="background: rgba(52, 152, 219, 0.8); color: white;">🤝 Contribute</button>
         </div>
 
         <div class="audio-controls" id="audioControls" style="display: none;">
@@ -377,6 +381,32 @@
             </div>
             <button class="btn" onclick="pauseResume()" id="pauseBtn">⏸️ Pause</button>
             <button class="btn secondary" onclick="stopReading()">⏹️ Stop</button>
+        </div>
+
+        <!-- Live Tally Revolution Status -->
+        <div class="tally-revolution-status" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(52, 152, 219, 0.1)); padding: 20px; border-radius: 15px; margin: 20px 0; text-align: center; border: 2px solid rgba(231, 76, 60, 0.3);">
+            <h3 style="color: #e74c3c; margin-bottom: 15px;">🌍 Live Tally Revolution</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px;">
+                <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.2em; font-weight: bold; color: #3498db;">👑 Individual</div>
+                    <div id="live-user-tally" style="font-size: 1.5em; font-weight: bold;">1.0</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.2em; font-weight: bold; color: #e74c3c;">🌐 Network</div>
+                    <div id="live-network-tally" style="font-size: 1.5em; font-weight: bold;">1.0</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.2em; font-weight: bold; color: #27ae60;">🤝 Collective</div>
+                    <div id="live-collective-tally" style="font-size: 1.5em; font-weight: bold;">2.0</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.8); padding: 15px; border-radius: 10px;">
+                    <div style="font-size: 1.2em; font-weight: bold; color: #f39c12;">💫 Global</div>
+                    <div id="live-global-tally" style="font-size: 1.5em; font-weight: bold;">0.5</div>
+                </div>
+            </div>
+            <div style="font-size: 0.9em; color: #7f8c8d;">
+                <span id="tally-message">Reading the parable strengthens the revolution...</span>
+            </div>
         </div>
 
         <main class="content" id="storyContent">
@@ -635,6 +665,207 @@
         function shareOnLinkedIn() {
             window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
         }
+
+        // ======================
+        // CRYPTO TALLY REVOLUTION
+        // ======================
+
+        // Global tally economy state
+        const tallyEconomy = {
+            user: 1.0,
+            network: 1.0,
+            collective: 2.0,
+            global: 0.5,
+            totalValue: 4.5,
+            transactions: [],
+            revolutionActive: false,
+            lastInteraction: Date.now()
+        };
+
+        // Initialize tally system
+        function initTallySystem() {
+            updateTallyDisplays();
+
+            // Connect to global tally network (simulated)
+            simulateNetworkConnection();
+
+            // Start periodic updates
+            setInterval(updateTallySystem, 5000);
+
+            // Track reading progress for tally rewards
+            document.addEventListener('scroll', handleReadingProgress);
+        }
+
+        function updateTallyDisplays() {
+            // Update header tallies
+            document.getElementById('userTally').textContent = `👑 Your Tally: ${tallyEconomy.user.toFixed(1)}`;
+            document.getElementById('networkTally').textContent = `🌐 Network Tally: ${tallyEconomy.network.toFixed(1)}`;
+
+            // Update live revolution display
+            document.getElementById('live-user-tally').textContent = tallyEconomy.user.toFixed(1);
+            document.getElementById('live-network-tally').textContent = tallyEconomy.network.toFixed(1);
+            document.getElementById('live-collective-tally').textContent = tallyEconomy.collective.toFixed(1);
+            document.getElementById('live-global-tally').textContent = tallyEconomy.global.toFixed(1);
+        }
+
+        function handleReadingProgress() {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+
+            // Reward reading with small tally increases
+            if (scrollPercent > 25 && scrollPercent % 25 < 5) {
+                const readingReward = 0.05 + (Math.random() * 0.1);
+                tallyEconomy.user += readingReward;
+                tallyEconomy.totalValue += readingReward;
+
+                tallyEconomy.transactions.push({
+                    from: 'parable', to: 'reader', amount: readingReward,
+                    narrative: 'Wisdom gained from understanding the parable'
+                });
+
+                updateTallyDisplays();
+                showTallyMessage('📖 Reading reward: +' + readingReward.toFixed(2) + ' tally');
+            }
+        }
+
+        function participateInRevolution() {
+            if (!tallyEconomy.revolutionActive) {
+                tallyEconomy.revolutionActive = true;
+
+                // Initial revolution boost
+                const revolutionBoost = 0.3 + (Math.random() * 0.4);
+                tallyEconomy.user += revolutionBoost * 0.6;
+                tallyEconomy.network += revolutionBoost * 0.4;
+                tallyEconomy.totalValue += revolutionBoost;
+
+                tallyEconomy.transactions.push({
+                    from: 'revolution', to: 'participant', amount: revolutionBoost,
+                    narrative: 'Joined the crypotaLLY revolution - power redistributed'
+                });
+
+                updateTallyDisplays();
+                showTallyMessage('⚡ Revolution joined! Power decentralized across network');
+
+                // Change button to show active participation
+                event.target.textContent = '🔥 Revolution Active';
+                event.target.style.background = 'rgba(231, 76, 60, 1)';
+
+                // Connect to other platforms
+                connectToTallyNetwork();
+            }
+        }
+
+        function contributeToCommons() {
+            if (tallyEconomy.user > 0.2) {
+                const contribution = Math.min(tallyEconomy.user * 0.15, 0.5);
+                tallyEconomy.user -= contribution;
+                tallyEconomy.collective += contribution * 0.7;
+                tallyEconomy.global += contribution * 0.3;
+
+                tallyEconomy.transactions.push({
+                    from: 'user', to: 'commons', amount: contribution,
+                    narrative: 'Contribution to economic commons - strengthening collective power'
+                });
+
+                updateTallyDisplays();
+                showTallyMessage('🤝 Contribution made: ' + contribution.toFixed(2) + ' tally to commons');
+
+                // Visual feedback
+                animateButton(event.target, '✓ Contributed');
+            } else {
+                showTallyMessage('💡 Build your tally power first through reading and participation');
+            }
+        }
+
+        function connectToTallyNetwork() {
+            // Simulate connection to other platforms
+            const networkBoost = 0.1 + (Math.random() * 0.2);
+            tallyEconomy.network += networkBoost;
+            tallyEconomy.totalValue += networkBoost;
+
+            tallyEconomy.transactions.push({
+                from: 'network', to: 'system', amount: networkBoost,
+                narrative: 'Connected to global tally network - infrastructure strengthened'
+            });
+
+            updateTallyDisplays();
+            showTallyMessage('🌐 Connected to global tally network');
+        }
+
+        function simulateNetworkConnection() {
+            // Simulate background network activity
+            setInterval(() => {
+                if (tallyEconomy.revolutionActive) {
+                    const networkGrowth = 0.02 + (Math.random() * 0.03);
+                    tallyEconomy.network += networkGrowth;
+                    tallyEconomy.totalValue += networkGrowth;
+
+                    updateTallyDisplays();
+                }
+            }, 10000);
+        }
+
+        function updateTallySystem() {
+            // Passive growth when revolution is active
+            if (tallyEconomy.revolutionActive) {
+                const passiveGrowth = 0.01 + (Math.random() * 0.02);
+                tallyEconomy.global += passiveGrowth;
+                tallyEconomy.totalValue += passiveGrowth;
+
+                updateTallyDisplays();
+            }
+
+            // Sync with other platforms (localStorage as simulated network)
+            syncWithOtherPlatforms();
+        }
+
+        function syncWithOtherPlatforms() {
+            // Use localStorage to simulate cross-platform synchronization
+            const networkData = JSON.parse(localStorage.getItem('tally_network') || '{}');
+
+            if (networkData.globalAverage) {
+                // Move toward network average (simulated harmonization)
+                const adjustment = (networkData.globalAverage - tallyEconomy.global) * 0.1;
+                tallyEconomy.global += adjustment;
+                tallyEconomy.totalValue += Math.abs(adjustment);
+            }
+
+            // Share our data
+            localStorage.setItem('tally_network', JSON.stringify({
+                user: tallyEconomy.user,
+                network: tallyEconomy.network,
+                collective: tallyEconomy.collective,
+                global: tallyEconomy.global,
+                lastUpdate: Date.now(),
+                globalAverage: (tallyEconomy.global + (networkData.global || 0)) / 2
+            }));
+        }
+
+        function showTallyMessage(message) {
+            const messageElement = document.getElementById('tally-message');
+            messageElement.textContent = message;
+            messageElement.style.color = '#e74c3c';
+            messageElement.style.fontWeight = 'bold';
+
+            setTimeout(() => {
+                messageElement.textContent = 'Reading the parable strengthens the revolution...';
+                messageElement.style.color = '#7f8c8d';
+                messageElement.style.fontWeight = 'normal';
+            }, 5000);
+        }
+
+        function animateButton(button, newText) {
+            const originalText = button.textContent;
+            button.textContent = newText;
+            button.style.transform = 'scale(1.1)';
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.transform = 'scale(1)';
+            }, 2000);
+        }
+
+        // Initialize the tally system when page loads
+        window.addEventListener('load', initTallySystem);
     </script>
 </body>
 </html>

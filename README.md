@@ -14,6 +14,8 @@ economic-justice-platform/
 ├── multi-agent-chat.html          # Human-AI collaboration forum
 ├── assets/                        # Media and styling assets
 ├── backend/                       # Node.js API server with real-time features
+├── tally-server.cpp              # C++ ASM server with Tailscale replacement
+├── Makefile                      # Build system for C++ server
 ├── deployment-guide.md            # Comprehensive deployment instructions
 ├── GEMINI.md                      # Technical documentation
 ├── TASKS.md                       # Development backlog
@@ -26,8 +28,12 @@ economic-justice-platform/
 ```bash
 npm start          # Start C++ server (port 8080)
 npm run serve      # Start static server (port 3000)
-npm run cpp:build  # Build C++ tally server
-npm run cpp:run    # Run tally server
+npm run cpp:build  # Build C++ tally server with Tailscale replacement
+npm run cpp:run    # Run tally server with secure networking
+make               # Build C++ server with OpenSSL and assembly integration
+make run           # Build and run server
+make debug         # Build with debug symbols
+make release       # Build optimized release
 ```
 
 ### Backend Development
@@ -59,7 +65,8 @@ npx serve .              # Alternative static server
 ## ✅ Current Status
 - All 4 main HTML files created and functional
 - Backend API server with real-time capabilities
-- C++ tally server for secure operations
+- C++ tally server with Tailscale replacement networking
+- Secure peer-to-peer communication with encryption
 - Complete documentation and deployment guides
 - Ready for immediate global distribution
 

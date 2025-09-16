@@ -783,4 +783,186 @@
             }
         };
 
-        //
+        // Add missing JavaScript functions for AI chat integration
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+
+            if (!message || isProcessing) return;
+
+            // Add user message to chat
+            addMessage('human', 'You', message);
+            input.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+            isProcessing = true;
+
+            // Prepare conversation context
+            const context = {
+                topic: currentTopic,
+                mode: currentMode,
+                topicContext: topicContexts[currentTopic] || topicContexts['monetary-reform']
+            };
+
+            // Call backend AI API
+            fetch('http://localhost:3002/api/ai/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    messages: [{ role: 'user', content: message }],
+                    context: context,
+                    conversationHistory: conversationHistory,
+                    max_tokens: 500
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideTypingIndicator();
+                isProcessing = false;
+
+                if (data.success) {
+                    addMessage('ai', data.agent, data.response);
+                    conversationHistory.push({
+                        user: message,
+                        ai: data.response,
+                        agent: data.agent,
+                        timestamp: new Date().toISOString()
+                    });
+                } else {
+                    // Fallback to mock responses if API fails
+                    const mockResponse = generateMockResponse(message);
+                    addMessage('ai', 'AI Assistant', mockResponse);
+                }
+            })
+            .catch(error => {
+                console.error('AI API Error:', error);
+                hideTypingIndicator();
+                isProcessing = false;
+
+                // Fallback to mock responses
+                const mockResponse = generateMockResponse(message);
+                addMessage('ai', 'AI Assistant', mockResponse);
+            });
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function quickInsert(text) {
+            const input = document.getElementById('message-input');
+            input.value = text;
+            input.focus();
+        }
+
+        function addMessage(type, sender, content) {
+            const messagesArea = document.getElementById('messages-area');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+
+            const avatarClass = type === 'human' ? 'human-avatar' : 'ai-avatar';
+            const avatarText = type === 'human' ? 'U' : sender.charAt(0);
+
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <div class="message-header">
+                        <div class="agent-avatar ${avatarClass}">${avatarText}</div>
+                        <strong>${sender}</strong>
+                    </div>
+                    <div class="message-content">${content}</div>
+                </div>
+            `;
+
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            indicator.style.display = 'flex';
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            indicator.style.display = 'none';
+        }
+
+        function generateMockResponse(message) {
+            // Simple mock response fallback
+            const lowerMessage = message.toLowerCase();
+
+            if (lowerMessage.includes('money') || lowerMessage.includes('bank')) {
+                return "The current monetary system creates money as debt through private banks. Sovereign money creation could give communities democratic control over their financial resources.";
+            } else if (lowerMessage.includes('worker') || lowerMessage.includes('coop')) {
+                return "Worker cooperatives show higher productivity and better resilience during economic crises. The Mondragon Corporation in Spain employs over 80,000 people with democratic governance.";
+            } else if (lowerMessage.includes('basic income') || lowerMessage.includes('ubi')) {
+                return "Universal Basic Income trials show reduced poverty without significant work disincentives. Alaska's Permanent Fund has provided annual dividends to all residents since 1982.";
+            } else {
+                return "Economic justice requires both systemic change and community action. What specific aspect of economic transformation interests you most?";
+            }
+        }
+
+        // Initialize topic selection
+        document.querySelectorAll('.topic-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.topic-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                currentTopic = this.dataset.topic;
+
+                addMessage('system', 'System', `Discussion topic changed to <strong>${this.textContent.trim()}</strong>.`);
+            });
+        });
+
+        // Initialize mode selection
+        document.querySelectorAll('.mode-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                currentMode = this.dataset.mode;
+
+                const modeNames = {
+                    'discussion': 'Discussion',
+                    'consensus': 'Consensus Building',
+                    'strategy': 'Strategy Session',
+                    'support': 'Mutual Aid'
+                };
+
+                addMessage('system', 'System', `Conversation mode changed to <strong>${modeNames[currentMode]}</strong>.`);
+            });
+        });
+
+        // Test backend connection on load
+        fetch('http://localhost:3002/api/ai/health')
+            .then(response => response.json())
+            .then(data => {
+                const statusIndicator = document.getElementById('status-indicator');
+                if (data.configured) {
+                    statusIndicator.textContent = 'AI agents connected and ready! Start the conversation!';
+                    statusIndicator.style.background = 'rgba(39, 174, 96, 0.1)';
+                    statusIndicator.style.borderColor = '#27ae60';
+                    statusIndicator.style.color = '#27ae60';
+                } else {
+                    statusIndicator.textContent = 'AI agents in demo mode (no API key configured)';
+                    statusIndicator.style.background = 'rgba(241, 196, 15, 0.1)';
+                    statusIndicator.style.borderColor = '#f39c12';
+                    statusIndicator.style.color = '#f39c12';
+                }
+            })
+            .catch(error => {
+                console.error('Backend health check failed:', error);
+                const statusIndicator = document.getElementById('status-indicator');
+                statusIndicator.textContent = 'Backend connection failed - using demo mode';
+                statusIndicator.style.background = 'rgba(231, 76, 60, 0.1)';
+                statusIndicator.style.borderColor = '#e74c3c';
+                statusIndicator.style.color = '#e74c3c';
+            });
+
+    </script>
+</body>
+</html>

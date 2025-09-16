@@ -198,8 +198,8 @@ router.post('/chat', async (req, res) => {
       });
     }
 
-    // Otherwise, select participant based on message content
-    const selectedParticipant = aipManager.selectParticipantForMessage(userMessage);
+    // Otherwise, select participant based on message content and context
+    const selectedParticipant = aipManager.selectParticipantForMessage(userMessage, context);
     const response = await selectedParticipant.generateResponse(
       userMessage, 
       context, 

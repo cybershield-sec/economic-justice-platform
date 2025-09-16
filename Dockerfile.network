@@ -1,0 +1,19 @@
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libssl-dev \
+    libboost-all-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY tally-server.cpp ./
+COPY network-config.json ./
+
+RUN g++ -o tally-server tally-server.cpp -lssl -lcrypto -lboost_system -lboost_thread -lpthread
+
+EXPOSE 8080 8081
+
+CMD ["./tally-server"]

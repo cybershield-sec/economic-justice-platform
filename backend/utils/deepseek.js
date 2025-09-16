@@ -252,15 +252,35 @@ Return JSON response with this structure:
   // Helper method to parse AI responses
   parseAIResponse(response) {
     try {
-      const content = response.choices[0].message.content;
-      // Try to extract JSON from code blocks or parse directly
-      const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/) || content.match(/```\s*([\s\S]*?)\s*```/);
-      const jsonString = jsonMatch ? jsonMatch[1] : content;
+      if (!response.choices || !response.choices[0] || !response.choices[0].message) {
+        return { error: 'Invalid response format', raw: response };
+      }
 
-      return JSON.parse(jsonString);
+      const content = response.choices[0].message.content;
+
+      // First try to parse as JSON directly
+      try {
+        return JSON.parse(content);
+      } catch (e) {
+        // If not JSON, try to extract JSON from code blocks
+        const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/) || content.match(/```\s*([\s\S]*?)\s*```/);
+        if (jsonMatch) {
+          return JSON.parse(jsonMatch[1]);
+        }
+
+        // If it's plain text, return it as a successful response
+        return {
+          success: true,
+          message: content,
+          isTextResponse: true
+        };
+      }
     } catch (error) {
       console.error('Failed to parse AI response:', error);
-      return { error: 'Failed to parse AI response', raw: response.choices[0].message.content };
+      return {
+        error: 'Failed to parse AI response',
+        raw: response.choices ? response.choices[0]?.message?.content : 'No content'
+      };
     }
   }
 }

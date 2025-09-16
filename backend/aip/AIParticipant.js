@@ -44,9 +44,11 @@ class AIParticipant {
       });
 
       const aiResponse = this.deepseek.parseAIResponse(response);
-      const responseContent = aiResponse.choices && aiResponse.choices[0] 
-        ? aiResponse.choices[0].message.content 
-        : this.getFallbackResponse();
+      const responseContent = aiResponse.isTextResponse
+        ? aiResponse.message
+        : (aiResponse.choices && aiResponse.choices[0]
+          ? aiResponse.choices[0].message.content
+          : this.getFallbackResponse());
 
       // Add response to history
       this.conversationHistory.push({
@@ -76,10 +78,10 @@ RESPONSE STYLES:
 ${this.responseStyles.join(', ')}
 
 CURRENT DISCUSSION CONTEXT:
-Topic: ${context.topic}
-Description: ${context.description}
-Key Points: ${context.keyPoints.join(', ')}
-Mode: ${context.mode}
+Topic: ${context.topic || 'general'}
+Description: ${context.topicContext?.context || 'Economic justice discussion'}
+Key Points: ${context.topicContext?.keyPoints ? context.topicContext.keyPoints.join(', ') : 'economic justice, community action'}
+Mode: ${context.mode || 'discussion'}
 
 RECENT CONVERSATION:
 ${recentHistory}
@@ -108,15 +110,67 @@ RESPONSE GUIDELINES:
 
   // Get fallback response when API fails
   getFallbackResponse() {
-    const fallbacks = [
-      `As a ${this.role}, I believe this is an important topic that deserves deeper exploration. What specific aspect would you like to discuss further?`,
-      `From my perspective as ${this.name}, this connects to broader themes in ${this.specialty}. I'd love to hear your thoughts on how we might approach this.`,
-      `I'm here to collaborate on economic justice solutions with my expertise in ${this.specialty}. Let's continue this important discussion.`,
-      `This raises interesting questions that relate to my work in ${this.specialty}. What experiences have you had with similar issues?`,
-      `Building on what's been discussed, I think there are several pathways forward in ${this.specialty}. What resonates most with you?`
+    // Agent-specific fallback responses based on specialty
+    const agentFallbacks = {
+      economist: [
+        "From an economic perspective, sovereign money creation could reduce our dependence on private banking debt. Historical examples like Lincoln's Greenbacks show this is feasible.",
+        "The current fractional reserve system creates money as debt. A public banking option could provide counter-cyclical lending during recessions.",
+        "Studies show that public banks like the Bank of North Dakota weathered the 2008 crisis better than private institutions. This model deserves serious consideration.",
+        "Worker cooperatives show 5-10% higher productivity than traditional firms according to recent studies. The incentive alignment creates better outcomes.",
+        "UBI trials in Kenya and Finland show reduced poverty without significant work disincentives. The data is promising for broader implementation."
+      ],
+      activist: [
+        "We need to organize! Start with local credit unions and public banking campaigns. Every community deserves democratic control over its financial resources.",
+        "The Federal Reserve serves Wall Street, not Main Street. Join the movement for monetary democracy - your voice matters!",
+        "Every workplace can be democratized! Start with your own - propose profit-sharing, push for board representation, organize your coworkers.",
+        "Worker power is rising! From Starbucks to Amazon, people are demanding dignity. Cooperatives are the next step in this movement.",
+        "UBI is a human right! Organize locally - petition city councils, create mutual aid networks that prefigure basic income."
+      ],
+      historian: [
+        "The tally stick system worked for 700 years in England before private banking interests destroyed it. History shows alternatives are possible.",
+        "Every major economic transformation faced 'impossibility' claims. The New Deal, Social Security, Medicare - all were called radical.",
+        "The Rochdale Pioneers started with 28 weavers in 1844. Today, cooperatives serve 1 billion people globally. Movements grow from small beginnings.",
+        "Thomas Paine proposed a citizen's dividend in 1797. Martin Luther King Jr. championed guaranteed income. This idea has deep roots.",
+        "Medieval guilds tracked member contributions through elaborate systems. Community accounting has historical precedent."
+      ],
+      policy: [
+        "HR 2990, the NEED Act, provided a legislative template for monetary reform. We can build on this framework with updated provisions.",
+        "State-level public banking bills are advancing in 20+ states. California's AB 857 created a legal framework others can adopt.",
+        "The Main Street Employee Ownership Act provides tax incentives for worker buyouts. We need to expand and strengthen these provisions.",
+        "Carbon fee-and-dividend proposals could fund partial UBI while addressing climate change. The Energy Innovation Act provides a model.",
+        "Complementary currency legislation exists in multiple states. The E-Gold Act provides regulatory clarity for digital value systems."
+      ],
+      legal: [
+        "Constitutional frameworks often allow for innovative economic systems when they serve public purpose and general welfare.",
+        "Human rights law increasingly recognizes economic rights as fundamental, including rights to housing, healthcare, and dignified work.",
+        "Legal precedents exist for community-based economic systems that operate alongside traditional market structures.",
+        "Many jurisdictions have laws supporting cooperative business models and worker ownership structures.",
+        "International human rights frameworks provide strong foundations for challenging exploitative economic practices."
+      ],
+      educator: [
+        "Let me break this down: economic justice means ensuring everyone has access to resources and opportunities for a dignified life.",
+        "Think of it like this: our current system prioritizes profit over people, but alternatives prioritize community well-being.",
+        "A helpful analogy: just as we need diverse ecosystems in nature, we need diverse economic models for community resilience.",
+        "The key concept here is that money should serve people, not the other way around. This shifts our entire perspective.",
+        "Imagine an economy where your caregiving, creativity, and community work are valued as much as traditional paid work."
+      ],
+      currency: [
+        "A tally-based accounting system could track real resource flows rather than abstract monetary values.",
+        "Community-validated contribution metrics prevent gaming while maintaining transparency in value exchange.",
+        "By separating the unit of account from the medium of exchange, we can design better economic feedback loops.",
+        "Cryptographic systems can ensure security while maintaining community control over value creation.",
+        "Resource-based accounting focuses on what we actually produce and need, rather than abstract financial metrics."
+      ]
+    };
+
+    // Get responses for this specific agent or default to general responses
+    const responses = agentFallbacks[this.id] || [
+      `As a ${this.role}, I believe this is an important topic that deserves deeper exploration.`,
+      `From my perspective in ${this.specialty}, this connects to broader themes we should discuss.`,
+      `I'm here to collaborate on economic justice solutions with my expertise in ${this.specialty}.`
     ];
-    
-    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+
+    return responses[Math.floor(Math.random() * responses.length)];
   }
 
   // Generate follow-up response to continue conversation

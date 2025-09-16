@@ -3,57 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share Your Story - Economic Justice Community</title>
-    <link rel="icon" href="icon.svg" type="image/svg+xml">
-    <style>
-        body {
-            font-family: 'Georgia', serif;
-            line-height: 1.8;
-            color: #2c3e50;
-            background: url('../prompts/background2.png') center/cover no-repeat;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <nav class="global-nav" style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <a href="index.html" class="nav-btn" style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">📖 Story</a>
-            <a href="economic-justice-resources.html" class="nav-btn" style="background: #e74c3c; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">📚 Resources</a>
-            <a href="story-platform.html" class="nav-btn" style="background: #9b59b6; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">✍️ Share Story</a>
-            <a href="multi-agent-chat.html" class="nav-btn" style="background: #e67e22; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;">💬 The Commons</a>
-        </nav>
-
-        <h1>Share Your Economic Justice Story</h1>
-
-        <div style="background: rgba(52, 152, 219, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #9b59b6;">
-            <p><strong>Inspired by "The King's Reckoning"?</strong> Share your own story of economic struggle, resistance, or community organizing.</p>
-            <p>Every voice matters in building a more just economy. Your story could inspire others to take action.</p>
-            <a href="index.html" style="color: #e74c3c; font-weight: bold; margin-right: 1rem;">📖 Read the original story</a>
-            <a href="economic-justice-resources.html" style="color: #27ae60; font-weight: bold;">📚 Find organizations to support</a>
-        </div>
-
-        <p>This platform is for sharing stories about economic justice and community empowerment.</p>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Share Your Story - The King's Reckoning Community</title>
     <meta name="description" content="Share your own story of economic struggle or resistance. Every voice matters in building a more just economy.">
     <style>
@@ -356,6 +305,38 @@
             min-height: 200px;
         }
 
+        .rich-text-toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .rich-text-toolbar button {
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .rich-text-toolbar button:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+            transform: translateY(-1px);
+        }
+
+        .text-input-container {
+            position: relative;
+        }
+
         .text-input {
             width: 100%;
             min-height: 120px;
@@ -560,6 +541,44 @@
             }
         }
 
+        /* Skeleton loading styles */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-story {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .skeleton-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        .skeleton-line {
+            height: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 3px;
+        }
+
+        .skeleton-line.short { width: 60%; }
+        .skeleton-line.medium { width: 80%; }
+        .skeleton-line.long { width: 100%; }
+
         .empty-state {
             text-align: center;
             padding: 3rem;
@@ -580,6 +599,86 @@
             margin-bottom: 1rem;
             font-size: 0.9rem;
             color: #856404;
+        }
+
+        /* Comments Section Styles */
+        .comments-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .comments-container {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .comment {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .comment-time {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .comment-content {
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .comment-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .comment-textarea {
+            flex: 1;
+            min-height: 60px;
+            padding: 0.8rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        .comment-submit-btn {
+            padding: 0.6rem 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .comment-submit-btn:hover {
+            background: #2980b9;
+        }
+
+        .comment-submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -652,7 +751,339 @@
         </div>
     </div>
 
+    <!-- Authentication Modals -->
+    <div id="auth-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 400px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 id="modal-title" style="margin: 0; color: #2c3e50;">Login</h3>
+                <button onclick="closeAuthModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #7f8c8d;">&times;</button>
+            </div>
+
+            <div id="auth-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #e9ecef;">
+                <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')" style="padding: 0.8rem 1.5rem; background: none; border: none; cursor: pointer; font-weight: 600; color: #3498db; border-bottom: 3px solid #3498db;">Login</button>
+                <button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')" style="padding: 0.8rem 1.5rem; background: none; border: none; cursor: pointer; font-weight: 600; color: #7f8c8d; border-bottom: 3px solid transparent;">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" style="display: block;">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Email</label>
+                    <input type="email" id="login-email" required style="width: 100%; padding: 0.8rem; border: 1px solid #dee2e6; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Password</label>
+                    <input type="password" id="login-password" required style="width: 100%; padding: 0.8rem; border: 1px solid #dee2e6; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <button type="submit" style="width: 100%; background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; padding: 1rem; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;">Login</button>
+            </form>
+
+            <!-- Registration Form -->
+            <form id="register-form" style="display: none;">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Email</label>
+                    <input type="email" id="register-email" required style="width: 100%; padding: 0.8rem; border: 1px solid #dee2e6; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Display Name</label>
+                    <input type="text" id="register-display-name" style="width: 100%; padding: 0.8rem; border: 1px solid #dee2e6; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50;">Password</label>
+                    <input type="password" id="register-password" required minlength="6" style="width: 100%; padding: 0.8rem; border: 1px solid #dee2e6; border-radius: 8px; font-size: 1rem;">
+                </div>
+                <button type="submit" style="width: 100%; background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; border: none; padding: 1rem; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;">Register</button>
+            </form>
+
+            <div style="margin-top: 1.5rem; text-align: center; color: #7f8c8d; font-size: 0.9rem;">
+                <p>Or continue as <a href="#" onclick="closeAuthModal(); return false;" style="color: #3498db; text-decoration: none;">guest</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Menu -->
+    <div id="user-menu" class="modal" style="display: none; position: fixed; top: 2rem; right: 2rem; background: white; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; min-width: 200px;">
+        <div style="padding: 1rem;">
+            <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e9ecef;">
+                <div style="font-weight: 600; color: #2c3e50;" id="menu-user-name">Guest User</div>
+                <div style="font-size: 0.8rem; color: #7f8c8d;" id="menu-user-email">guest@example.com</div>
+            </div>
+            <button onclick="viewProfile()" style="width: 100%; background: none; border: none; padding: 0.8rem; text-align: left; cursor: pointer; color: #2c3e50;">👤 View Profile</button>
+            <button onclick="logout()" style="width: 100%; background: none; border: none; padding: 0.8rem; text-align: left; cursor: pointer; color: #e74c3c;">🚪 Logout</button>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999;" onclick="closeAllModals()"></div>
+
+    <style>
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        .auth-tab.active {
+            color: #3498db !important;
+            border-bottom-color: #3498db !important;
+        }
+
+        .user-status {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .user-status:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .user-status.authenticated {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.1));
+            color: #27ae60;
+        }
+
+        .user-status.guest {
+            background: linear-gradient(135deg, rgba(149, 165, 166, 0.1), rgba(189, 195, 199, 0.1));
+            color: #7f8c8d;
+        }
+    </style>
+
     <script>
+        // Authentication state management
+        let currentUser = null;
+        let authToken = localStorage.getItem('auth_token');
+
+        // Authentication functions
+        function openAuthModal() {
+            document.getElementById('auth-modal').style.display = 'block';
+            document.getElementById('modal-overlay').style.display = 'block';
+            switchAuthTab('login');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+            document.getElementById('modal-overlay').style.display = 'none';
+            clearAuthForms();
+        }
+
+        function closeAllModals() {
+            closeAuthModal();
+            document.getElementById('user-menu').style.display = 'none';
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = '#7f8c8d';
+                btn.style.borderBottomColor = 'transparent';
+            });
+
+            const activeTab = document.querySelector(`[data-tab="${tab}"]`);
+            activeTab.classList.add('active');
+            activeTab.style.color = '#3498db';
+            activeTab.style.borderBottomColor = '#3498db';
+
+            document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+            document.getElementById('modal-title').textContent = tab === 'login' ? 'Login' : 'Register';
+        }
+
+        function clearAuthForms() {
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-password').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-display-name').value = '';
+            document.getElementById('register-password').value = '';
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const response = await apiClient.login(email, password);
+                if (response.token) {
+                    authToken = response.token;
+                    currentUser = response.user;
+                    localStorage.setItem('auth_token', authToken);
+                    localStorage.setItem('user_data', JSON.stringify(currentUser));
+
+                    updateUserStatus();
+                    closeAuthModal();
+                    showMessage('Login successful! Welcome back.', 'success');
+                }
+            } catch (error) {
+                showMessage(error.message || 'Login failed. Please check your credentials.', 'error');
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const displayName = document.getElementById('register-display-name').value;
+            const password = document.getElementById('register-password').value;
+
+            try {
+                const response = await apiClient.register({ email, password, displayName });
+                if (response.token) {
+                    authToken = response.token;
+                    currentUser = response.user;
+                    localStorage.setItem('auth_token', authToken);
+                    localStorage.setItem('user_data', JSON.stringify(currentUser));
+
+                    updateUserStatus();
+                    closeAuthModal();
+                    showMessage('Registration successful! Welcome to the community.', 'success');
+                }
+            } catch (error) {
+                showMessage(error.message || 'Registration failed. Please try again.', 'error');
+            }
+        }
+
+        async function logout() {
+            try {
+                await apiClient.logout();
+            } catch (error) {
+                console.log('Logout API call failed (normal for guest mode):', error);
+            }
+
+            authToken = null;
+            currentUser = null;
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user_data');
+
+            updateUserStatus();
+            document.getElementById('user-menu').style.display = 'none';
+            showMessage('Logged out successfully.', 'success');
+        }
+
+        function updateUserStatus() {
+            const userStatus = document.getElementById('user-status') || createUserStatusUI();
+
+            if (currentUser && authToken) {
+                userStatus.className = 'user-status authenticated';
+                userStatus.innerHTML = `
+                    <span>👤 ${currentUser.displayName || currentUser.email}</span>
+                    <span style="font-size: 0.8rem;">▼</span>
+                `;
+                userStatus.title = 'Click to view profile options';
+            } else {
+                userStatus.className = 'user-status guest';
+                userStatus.innerHTML = `
+                    <span>👤 Guest User</span>
+                    <span style="font-size: 0.8rem;">▼</span>
+                `;
+                userStatus.title = 'Click to login or register';
+            }
+        }
+
+        function createUserStatusUI() {
+            const userStatus = document.createElement('div');
+            userStatus.id = 'user-status';
+            userStatus.className = 'user-status guest';
+            userStatus.innerHTML = `
+                <span>👤 Guest User</span>
+                <span style="font-size: 0.8rem;">▼</span>
+            `;
+            userStatus.onclick = toggleUserMenu;
+            userStatus.title = 'Click to login or register';
+
+            document.body.appendChild(userStatus);
+            return userStatus;
+        }
+
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('user-menu');
+            const overlay = document.getElementById('modal-overlay');
+
+            if (userMenu.style.display === 'block') {
+                userMenu.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                userMenu.style.display = 'block';
+                overlay.style.display = 'block';
+
+                if (currentUser) {
+                    document.getElementById('menu-user-name').textContent = currentUser.displayName || 'User';
+                    document.getElementById('menu-user-email').textContent = currentUser.email || '';
+                } else {
+                    document.getElementById('menu-user-name').textContent = 'Guest User';
+                    document.getElementById('menu-user-email').textContent = 'guest@example.com';
+                }
+            }
+        }
+
+        function viewProfile() {
+            if (currentUser) {
+                showMessage('Profile view would open here. User ID: ' + currentUser.id, 'info');
+            } else {
+                openAuthModal();
+            }
+            document.getElementById('user-menu').style.display = 'none';
+            document.getElementById('modal-overlay').style.display = 'none';
+        }
+
+        async function initializeAuth() {
+            // Check for existing authentication
+            const savedUser = localStorage.getItem('user_data');
+            if (savedUser && authToken) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    // Verify token is still valid
+                    apiClient.setToken(authToken);
+
+                    // Check if token might be expired (basic check)
+                    const tokenAge = Date.now() - (localStorage.getItem('token_timestamp') || 0);
+                    const sevenDays = 7 * 24 * 60 * 60 * 1000; // 7 days in ms
+
+                    if (tokenAge > sevenDays) {
+                        // Token might be expired, attempt to refresh
+                        console.log('Token may be expired, attempting to verify...');
+                        try {
+                            await apiClient.getProfile(); // This will fail if token is invalid
+                        } catch (error) {
+                            console.log('Token validation failed, clearing auth data:', error);
+                            localStorage.removeItem('user_data');
+                            localStorage.removeItem('auth_token');
+                            localStorage.removeItem('token_timestamp');
+                            currentUser = null;
+                            authToken = null;
+                        }
+                    }
+
+                    updateUserStatus();
+                } catch (error) {
+                    console.log('Failed to parse saved user data:', error);
+                    localStorage.removeItem('user_data');
+                    localStorage.removeItem('auth_token');
+                    localStorage.removeItem('token_timestamp');
+                }
+            }
+
+            // Setup event listeners
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+
+            // Create user status UI
+            updateUserStatus();
+        }
+
         // Sample stories data
         const sampleStories = [
             {
@@ -708,11 +1139,118 @@
         let mediaRecorder = null;
         let recordedChunks = [];
 
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', function() {
-            loadStories();
-            setupEventListeners();
-        });
+        // Rich text formatting functions
+        function formatText(format) {
+            const textInput = document.getElementById('text-input');
+            if (!textInput) return;
+
+            const start = textInput.selectionStart;
+            const end = textInput.selectionEnd;
+            const selectedText = textInput.value.substring(start, end);
+            let formattedText = '';
+
+            switch (format) {
+                case 'bold':
+                    formattedText = `**${selectedText}**`;
+                    break;
+                case 'italic':
+                    formattedText = `*${selectedText}*`;
+                    break;
+                case 'underline':
+                    formattedText = `__${selectedText}__`;
+                    break;
+                case 'quote':
+                    formattedText = `> ${selectedText}`;
+                    break;
+                case 'link':
+                    const url = prompt('Enter URL:');
+                    if (url) {
+                        formattedText = `[${selectedText}](${url})`;
+                    } else {
+                        return;
+                    }
+                    break;
+            }
+
+            textInput.value = textInput.value.substring(0, start) + formattedText + textInput.value.substring(end);
+            textInput.focus();
+            textInput.setSelectionRange(start + formattedText.length, start + formattedText.length);
+        }
+
+        // AI Analysis function
+        async function analyzeWithAI() {
+            const textInput = document.getElementById('text-input');
+            if (!textInput || !textInput.value.trim()) {
+                showMessage('Please write some content first to analyze.', 'error');
+                return;
+            }
+
+            const content = textInput.value.trim();
+
+            // Show loading state
+            const analyzeBtn = document.querySelector('[onclick="analyzeWithAI()"]');
+            const originalText = analyzeBtn.textContent;
+            analyzeBtn.textContent = 'Analyzing...';
+            analyzeBtn.disabled = true;
+
+            try {
+                const analysis = await apiClient.analyzeStory(content);
+
+                // Display AI analysis results
+                showAIResults(analysis);
+
+            } catch (error) {
+                console.error('AI analysis failed:', error);
+                showMessage('AI analysis failed. Please try again.', 'error');
+            } finally {
+                analyzeBtn.textContent = originalText;
+                analyzeBtn.disabled = false;
+            }
+        }
+
+        function showAIResults(analysis) {
+            // Create modal for AI results
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+                z-index: 10000;
+                max-width: 500px;
+                max-height: 80vh;
+                overflow-y: auto;
+            `;
+
+            modal.innerHTML = `
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="margin: 0 0 1rem 0; color: #2c3e50;">🤖 AI Analysis</h3>
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <strong>Sentiment:</strong> ${analysis.sentiment || 'Neutral'}<br>
+                        <strong>Key Themes:</strong> ${analysis.themes?.join(', ') || 'None detected'}
+                    </div>
+                    <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; border-left: 4px solid #27ae60;">
+                        <strong>Suggestions:</strong><br>
+                        ${analysis.suggestions?.join('<br>') || 'No specific suggestions'}
+                    </div>
+                </div>
+                <button onclick="this.parentElement.remove()" style="
+                    background: #3498db;
+                    color: white;
+                    border: none;
+                    padding: 0.8rem 1.5rem;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                ">Close</button>
+            `;
+
+            document.body.appendChild(modal);
+        }
 
         function setupEventListeners() {
             // Story type selection
@@ -746,6 +1284,23 @@
 
             // Submit button
             document.getElementById('submit-btn').addEventListener('click', submitStory);
+
+            // Real-time form validation
+            const textInput = document.getElementById('text-input');
+            const authorInput = document.getElementById('author-input');
+
+            if (textInput) {
+                textInput.addEventListener('input', updateValidationUI);
+                textInput.addEventListener('blur', updateValidationUI);
+            }
+
+            if (authorInput) {
+                authorInput.addEventListener('input', updateValidationUI);
+                authorInput.addEventListener('blur', updateValidationUI);
+            }
+
+            // Initial validation check
+            updateValidationUI();
         }
 
         function updatePlaceholder() {
@@ -765,22 +1320,35 @@
 
             if (currentMediaType === 'text') {
                 creationArea.innerHTML = `
-                    <textarea class="text-input" id="text-input" placeholder="Share your story..."></textarea>
+                    <div class="rich-text-toolbar">
+                        <button type="button" onclick="formatText('bold')" title="Bold"><strong>B</strong></button>
+                        <button type="button" onclick="formatText('italic')" title="Italic"><em>I</em></button>
+                        <button type="button" onclick="formatText('underline')" title="Underline"><u>U</u></button>
+                        <button type="button" onclick="formatText('quote')" title="Quote">❝</button>
+                        <button type="button" onclick="formatText('link')" title="Insert Link">🔗</button>
+                        <button type="button" onclick="analyzeWithAI()" title="AI Analysis" style="background: #9b59b6; color: white;">🤖 Analyze</button>
+                    </div>
+                    <div class="text-input-container">
+                        <textarea class="text-input" id="text-input" placeholder="Share your story..." oninput="updateCharacterCount(this.value)"></textarea>
+                    </div>
                 `;
                 updatePlaceholder();
             } else if (currentMediaType === 'audio') {
                 creationArea.innerHTML = `
-                    <div class="media-upload">
+                    <div class="media-upload" onclick="document.getElementById('audio-input').click()">
+                        <input type="file" id="audio-input" accept="audio/*" style="display: none;" onchange="handleAudioUpload(this)">
                         <div class="recording-controls">
                             <button class="record-btn" id="record-btn" onclick="toggleRecording()">
                                 🎤
                             </button>
                             <div class="timer" id="timer">00:00</div>
                         </div>
-                        <p style="margin-top: 1rem; color: #7f8c8d;">Click to start recording your story</p>
+                        <p style="margin-top: 1rem; color: #7f8c8d;">Click to record or upload audio</p>
+                        <p style="color: #7f8c8d; font-size: 0.9rem; margin-top: 0.5rem;">Or drag and drop audio files</p>
                         <div id="audio-preview"></div>
                     </div>
                 `;
+                setupAudioDragAndDrop();
             } else if (currentMediaType === 'video') {
                 creationArea.innerHTML = `
                     <div class="media-upload" onclick="document.getElementById('video-input').click()">
@@ -873,24 +1441,275 @@
         function handleVideoUpload(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
-                if (file.size > 100 * 1024 * 1024) { // 100MB limit
-                    alert('File too large. Please choose a video under 100MB.');
+
+                // Enhanced file validation with detailed error messages
+                const maxSize = 100 * 1024 * 1024; // 100MB
+                const allowedTypes = [
+                    'video/mp4', 'video/webm', 'video/ogg', 'video/quicktime', 'video/x-msvideo',
+                    'video/3gpp', 'video/3gpp2', 'video/x-matroska', 'video/x-flv'
+                ];
+                const allowedExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.flv', '.3gp', '.3g2'];
+
+                if (file.size > maxSize) {
+                    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1);
+                    showMessage(`File too large (${fileSizeMB}MB). Maximum size is 100MB. Please choose a smaller video.`, 'error');
                     return;
                 }
 
-                const videoUrl = URL.createObjectURL(file);
+                if (!allowedTypes.includes(file.type) && !allowedExtensions.some(ext => file.name.toLowerCase().endsWith(ext))) {
+                    showMessage(`Unsupported file type: ${file.type || 'unknown'}. Please use MP4, WebM, OGG, MOV, AVI, MKV, FLV, 3GP, or 3G2 formats.`, 'error');
+                    return;
+                }
+
+                // Show upload progress with enhanced UI
                 const videoPreview = document.getElementById('video-preview');
                 videoPreview.innerHTML = `
-                    <video controls style="width: 100%; margin-top: 1rem; border-radius: 10px;">
-                        <source src="${videoUrl}" type="${file.type}">
-                    </video>
+                    <div style="text-align: center; padding: 2.5rem; color: #7f8c8d; background: rgba(52, 152, 219, 0.05); border-radius: 15px; border: 2px dashed #3498db;">
+                        <div style="font-size: 3rem; margin-bottom: 1.5rem; animation: pulse 1.5s infinite; color: #3498db;">📤</div>
+                        <p style="font-weight: 700; margin-bottom: 0.8rem; font-size: 1.2rem; color: #2c3e50;">Uploading Video</p>
+                        <p style="font-size: 1rem; margin-bottom: 1.5rem; background: white; padding: 0.8rem; border-radius: 8px; border: 1px solid #e9ecef; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <span style="display: block; font-weight: 600; margin-bottom: 0.3rem;">📄 ${file.name}</span>
+                            <span style="font-size: 0.9rem; color: #7f8c8d;">${formatFileSize(file.size)}</span>
+                        </p>
+
+                        <div style="background: white; border-radius: 12px; padding: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                                <span style="font-size: 0.9rem; font-weight: 600; color: #2c3e50;">Progress</span>
+                                <span id="upload-percentage" style="font-size: 1rem; font-weight: 700; color: #3498db;">0%</span>
+                            </div>
+
+                            <div style="background: #e9ecef; border-radius: 10px; height: 16px; margin: 0.8rem 0; overflow: hidden; position: relative;">
+                                <div id="upload-progress" style="background: linear-gradient(90deg, #3498db, #2980b9); height: 100%; width: 0%; transition: width 0.2s ease; border-radius: 10px;"></div>
+                                <div id="upload-speed" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8rem; color: white; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Starting...</div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; font-size: 0.85rem;">
+                                <span id="upload-time" style="color: #7f8c8d;">⌛ Estimating...</span>
+                                <span style="color: #7f8c8d;">${formatFileSize(file.size)}</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 0.8rem; justify-content: center; margin-top: 1.5rem;">
+                            <button onclick="cancelUpload()" style="padding: 0.6rem 1.2rem; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.2s ease;">
+                                ❌ Cancel
+                            </button>
+                        </div>
+                    </div>
                 `;
+
+                let uploadStartTime = Date.now();
+                let lastLoaded = 0;
+                let lastTime = uploadStartTime;
+                let uploadXHR = null;
+                let isUploadCancelled = false;
+
+                // Store reference to cancel function
+                window.cancelUpload = function() {
+                    isUploadCancelled = true;
+                    if (uploadXHR) {
+                        uploadXHR.abort();
+                    }
+                    showMessage('Upload cancelled', 'info');
+                    videoPreview.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; color: #7f8c8d;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">⏹️</div>
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Upload Cancelled</p>
+                            <button onclick="document.getElementById('video-input').click()" style="padding: 0.8rem 1.5rem; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; margin-top: 1rem;">
+                                Choose Another File
+                            </button>
+                        </div>
+                    `;
+                };
+
+                // Upload file to backend with enhanced progress tracking
+                uploadFile(file, (progress, loaded, total) => {
+                    const progressBar = document.getElementById('upload-progress');
+                    const percentageElement = document.getElementById('upload-percentage');
+                    const speedElement = document.getElementById('upload-speed');
+                    const timeElement = document.getElementById('upload-time');
+
+                    if (progressBar) progressBar.style.width = `${progress}%`;
+                    if (percentageElement) percentageElement.textContent = `${Math.round(progress)}%`;
+
+                    // Calculate upload speed
+                    const currentTime = Date.now();
+                    const timeDiff = (currentTime - lastTime) / 1000; // seconds
+
+                    if (timeDiff > 0.3) { // Update speed every 300ms
+                        const loadedDiff = loaded - lastLoaded;
+                        const speed = loadedDiff / timeDiff; // bytes per second
+
+                        if (speedElement) {
+                            speedElement.textContent = formatSpeed(speed);
+                        }
+
+                        // Calculate estimated time remaining
+                        const remainingBytes = total - loaded;
+                        const secondsRemaining = remainingBytes / speed;
+
+                        if (timeElement && secondsRemaining > 0 && secondsRemaining < 3600) {
+                            timeElement.textContent = `⏱️ ETA: ${formatTimeRemaining(secondsRemaining)}`;
+                        } else if (timeElement) {
+                            timeElement.textContent = `⏱️ Calculating...`;
+                        }
+
+                        lastLoaded = loaded;
+                        lastTime = currentTime;
+                    }
+                }, (xhr) => {
+                    uploadXHR = xhr;
+                }).then((uploadResponse) => {
+                    if (isUploadCancelled) return;
+
+                    const videoUrl = uploadResponse.fileUrl || URL.createObjectURL(file);
+                    const uploadTime = ((Date.now() - uploadStartTime) / 1000).toFixed(1);
+
+                    videoPreview.innerHTML = `
+                        <div style="margin-top: 1rem;">
+                            <video controls style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 2px solid #e9ecef;">
+                                <source src="${videoUrl}" type="${file.type}">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.1)); border-radius: 10px; border: 1px solid rgba(39, 174, 96, 0.2);">
+                                <div style="display: flex; align-items: center; color: #27ae60;">
+                                    <span style="font-size: 1.5rem; margin-right: 0.5rem;">✅</span>
+                                    <div>
+                                        <div style="font-size: 1rem; font-weight: 700;">Upload Successful!</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.8;">Ready to share with your story</div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.9rem; color: #27ae60; font-weight: 600; background: rgba(255,255,255,0.9); padding: 0.3rem 0.6rem; border-radius: 5px;">
+                                    ${uploadTime}s
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 1rem; text-align: center;">
+                                <button onclick="document.getElementById('video-input').click()" style="padding: 0.6rem 1.2rem; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; margin-right: 0.5rem;">
+                                    📁 Replace Video
+                                </button>
+                                <button onclick="currentMediaType = 'text'; updateCreationArea();" style="padding: 0.6rem 1.2rem; background: #95a5a6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600;">
+                                    📝 Switch to Text
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    showMessage('🎉 Video uploaded successfully! Ready to share with your story.', 'success');
+                }).catch((error) => {
+                    if (isUploadCancelled) return;
+
+                    console.error('Upload failed:', error);
+                    videoPreview.innerHTML = `
+                        <div style="text-align: center; padding: 2.5rem; color: #e74c3c; background: rgba(231, 76, 60, 0.05); border-radius: 15px; border: 2px dashed #e74c3c;">
+                            <div style="font-size: 3rem; margin-bottom: 1.5rem;">❌</div>
+                            <p style="font-weight: 700; margin-bottom: 0.8rem; font-size: 1.2rem;">Upload Failed</p>
+                            <p style="font-size: 1rem; margin-bottom: 2rem; line-height: 1.5;">${error.message || 'Please check your internet connection and try again'}</p>
+
+                            <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+                                <button onclick="document.getElementById('video-input').click()" style="padding: 0.8rem 1.5rem; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;">
+                                    🔄 Try Again
+                                </button>
+                                <button onclick="currentMediaType = 'text'; updateCreationArea();" style="padding: 0.8rem 1.5rem; background: #95a5a6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;">
+                                    📝 Switch to Text
+                                </button>
+                                <button onclick="showHelp('upload')" style="padding: 0.8rem 1.5rem; background: #f39c12; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;">
+                                    ❓ Get Help
+                                </button>
+                            </div>
+
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(231, 76, 60, 0.1); border-radius: 8px; font-size: 0.9rem;">
+                                <p style="margin: 0 0 0.5rem 0; font-weight: 600;">💡 Tips:</p>
+                                <ul style="margin: 0; padding-left: 1.2rem; text-align: left;">
+                                    <li>Check your internet connection</li>
+                                    <li>Try a smaller file (max 100MB)</li>
+                                    <li>Use supported formats: MP4, WebM, MOV</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    showMessage('❌ Failed to upload video. Please try again or switch to text.', 'error');
+                });
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatSpeed(bytesPerSecond) {
+            if (bytesPerSecond === 0) return '0 B/s';
+            const k = 1024;
+            const sizes = ['B/s', 'KB/s', 'MB/s', 'GB/s'];
+            const i = Math.floor(Math.log(bytesPerSecond) / Math.log(k));
+            return parseFloat((bytesPerSecond / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+
+        function formatTimeRemaining(seconds) {
+            if (seconds < 60) {
+                return `${Math.ceil(seconds)}s`;
+            } else {
+                const minutes = Math.ceil(seconds / 60);
+                return `${minutes}m`;
+            }
+        }
+
+        async function uploadFile(file, onProgress) {
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const xhr = new XMLHttpRequest();
+
+                return new Promise((resolve, reject) => {
+                    xhr.open('POST', `${apiClient.baseURL}/upload`);
+
+                    if (apiClient.token) {
+                        xhr.setRequestHeader('Authorization', `Bearer ${apiClient.token}`);
+                    }
+
+                    if (onProgress) {
+                        xhr.upload.addEventListener('progress', (event) => {
+                            if (event.lengthComputable) {
+                                const percentComplete = (event.loaded / event.total) * 100;
+                                // Call onProgress with additional data for enhanced tracking
+                                onProgress(percentComplete, event.loaded, event.total);
+                            }
+                        });
+                    }
+
+                    xhr.onload = () => {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            try {
+                                const response = JSON.parse(xhr.responseText);
+                                resolve(response);
+                            } catch (error) {
+                                resolve(xhr.responseText);
+                            }
+                        } else {
+                            reject(new Error(`Upload failed: ${xhr.statusText}`));
+                        }
+                    };
+
+                    xhr.onerror = () => {
+                        reject(new Error('Network error during upload'));
+                    };
+
+                    xhr.send(formData);
+                });
+            } catch (error) {
+                console.error('File upload error:', error);
+                throw new Error(error.message || 'Upload failed');
             }
         }
 
         function setupDragAndDrop() {
             const uploadArea = document.querySelector('.media-upload');
 
+            // Enhanced drag and drop with better visual feedback
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 uploadArea.addEventListener(eventName, preventDefaults, false);
             });
@@ -900,26 +1719,160 @@
                 e.stopPropagation();
             }
 
+            // Create drop zone highlight elements
+            const dropZoneHighlight = document.createElement('div');
+            dropZoneHighlight.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border: 3px dashed #e74c3c;
+                border-radius: 10px;
+                background: rgba(231, 76, 60, 0.05);
+                display: none;
+                z-index: 5;
+                pointer-events: none;
+            `;
+            uploadArea.appendChild(dropZoneHighlight);
+
+            // Create drop zone message
+            const dropMessage = document.createElement('div');
+            dropMessage.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: #e74c3c;
+                font-weight: bold;
+                display: none;
+                z-index: 6;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1.5rem 2rem;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                backdrop-filter: blur(10px);
+                border: 2px solid #e74c3c;
+                min-width: 200px;
+                pointer-events: none;
+            `;
+            dropMessage.innerHTML = `
+                <div style="font-size: 2.5rem; margin-bottom: 0.8rem; animation: bounce 0.5s infinite alternate;">📤</div>
+                <p style="margin: 0; font-size: 1.1rem; font-weight: 600;">Drop to upload</p>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; font-weight: normal; color: #7f8c8d;">Release to add your file</p>
+            `;
+            uploadArea.appendChild(dropMessage);
+
+            // Store original content
+            const originalContent = uploadArea.innerHTML;
+
             ['dragenter', 'dragover'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
+                uploadArea.addEventListener(eventName, (e) => {
+                    dropZoneHighlight.style.display = 'block';
+                    dropMessage.style.display = 'block';
+                    uploadArea.style.opacity = '0.7';
+                    uploadArea.style.transform = 'scale(1.02)';
+                    uploadArea.style.transition = 'all 0.3s ease';
+                }, false);
             });
 
             ['dragleave', 'drop'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, () => uploadArea.classList.remove('dragover'), false);
+                uploadArea.addEventListener(eventName, () => {
+                    dropZoneHighlight.style.display = 'none';
+                    dropMessage.style.display = 'none';
+                    uploadArea.style.opacity = '1';
+                    uploadArea.style.transform = 'scale(1)';
+                }, false);
             });
 
             uploadArea.addEventListener('drop', function(e) {
                 const dt = e.dataTransfer;
                 const files = dt.files;
                 if (files.length > 0) {
-                    handleVideoUpload({files: files});
+                    // Handle multiple files (take first appropriate file)
+                    const mediaFiles = Array.from(files).filter(file =>
+                        file.type.startsWith('video/') || file.type.startsWith('audio/')
+                    );
+
+                    if (mediaFiles.length > 0) {
+                        if (currentMediaType === 'video') {
+                            handleVideoUpload({files: mediaFiles});
+                        } else if (currentMediaType === 'audio') {
+                            handleAudioUpload({files: mediaFiles});
+                        }
+                    } else {
+                        showMessage('No supported media files found. Please drop a video or audio file.', 'error');
+                    }
                 }
             });
+
+            // Add click handler for better accessibility
+            uploadArea.addEventListener('click', function(e) {
+                if (e.target === uploadArea || !e.target.closest('button, input')) {
+                    if (currentMediaType === 'video') {
+                        document.getElementById('video-input').click();
+                    } else if (currentMediaType === 'audio') {
+                        document.getElementById('audio-input').click();
+                    }
+                }
+            });
+
+            // Add file type validation for better UX
+            uploadArea.addEventListener('dragover', (e) => {
+                const items = Array.from(e.dataTransfer.items);
+                const hasValidFiles = items.some(item => {
+                    if (item.kind === 'file') {
+                        const file = item.getAsFile();
+                        if (currentMediaType === 'video') {
+                            return file.type.startsWith('video/');
+                        } else if (currentMediaType === 'audio') {
+                            return file.type.startsWith('audio/');
+                        }
+                    }
+                    return false;
+                });
+
+                if (hasValidFiles) {
+                    e.dataTransfer.dropEffect = 'copy';
+                    dropZoneHighlight.style.borderColor = '#27ae60';
+                    dropZoneHighlight.style.background = 'rgba(39, 174, 96, 0.05)';
+                    dropMessage.innerHTML = `
+                        <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: #27ae60; animation: pulse 1s infinite;">✅</div>
+                        <p style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #27ae60;">Drop to upload</p>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; font-weight: normal; color: #27ae60;">Valid ${currentMediaType} file detected</p>
+                    `;
+                } else {
+                    e.dataTransfer.dropEffect = 'none';
+                    dropZoneHighlight.style.borderColor = '#e74c3c';
+                    dropZoneHighlight.style.background = 'rgba(231, 76, 60, 0.05)';
+                    dropMessage.innerHTML = `
+                        <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: #e74c3c;">❌</div>
+                        <p style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #e74c3c;">Invalid file type</p>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; font-weight: normal; color: #e74c3c;">Please drop a ${currentMediaType} file</p>
+                    `;
+                }
+            });
+
+            // Add bounce animation for drop zone
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes bounce {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-10px); }
+                }
+                @keyframes pulse {
+                    0% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.7; transform: scale(1.1); }
+                    100% { opacity: 1; transform: scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
         }
 
         function loadStories() {
             const container = document.getElementById('stories-container');
-            container.innerHTML = sampleStories.map(story => createStoryCard(story)).join('');
+            container.innerHTML = stories.map(story => createStoryCard(story)).join('');
         }
 
         function createStoryCard(story) {
@@ -935,31 +1888,65 @@
                 solution: 'My Solution'
             };
 
+            // Handle both backend and frontend data structures
+            const author = story.author_name || story.author || 'Anonymous';
+            const content = story.content || '';
+            const likes = story.like_count || story.likes || 0;
+            const storyType = story.category || story.type || 'struggle';
+            const time = story.created_at ? formatTimeAgo(new Date(story.created_at)) : story.time || 'Recently';
+
             return `
-                <div class="story-card" data-type="${story.type}">
-                    <div class="story-type ${typeClasses[story.type]}">${typeLabels[story.type]}</div>
+                <div class="story-card" data-type="${storyType}">
+                    <div class="story-type ${typeClasses[storyType]}">${typeLabels[storyType]}</div>
                     <div class="story-header">
-                        <div class="avatar">${story.author.charAt(0).toUpperCase()}</div>
+                        <div class="avatar">${author.charAt(0).toUpperCase()}</div>
                         <div class="story-meta">
-                            <div class="story-author">${story.author}</div>
-                            <div class="story-time">${story.time}</div>
+                            <div class="story-author">${author}</div>
+                            <div class="story-time">${time}</div>
                         </div>
                     </div>
-                    <div class="story-content">${story.content}</div>
+                    <div class="story-content">${content}</div>
                     ${story.media ? `<div class="story-media">${story.media}</div>` : ''}
                     <div class="story-actions">
                         <button class="action-btn" onclick="toggleLike(${story.id})">
-                            <span id="heart-${story.id}">🤍</span> <span id="likes-${story.id}">${story.likes}</span>
+                            <span id="heart-${story.id}">🤍</span> <span id="likes-${story.id}">${likes}</span>
+                        </button>
+                        <button class="action-btn" onclick="toggleComments(${story.id})">
+                            💬 <span id="comment-count-${story.id}">${story.comment_count || 0}</span>
                         </button>
                         <button class="action-btn" onclick="shareStory(${story.id})">
                             📤 Share
                         </button>
-                        <button class="action-btn" onclick="supportUser('${story.author}')">
+                        <button class="action-btn" onclick="supportUser('${author}')">
                             🤝 Connect
                         </button>
                     </div>
+                    <div class="comments-section" id="comments-${story.id}" style="display: none;">
+                        <div class="comments-container" id="comments-container-${story.id}">
+                            <!-- Comments will be loaded here -->
+                        </div>
+                        <div class="comment-input">
+                            <textarea class="comment-textarea" id="comment-text-${story.id}" placeholder="Add a comment..."></textarea>
+                            <button class="comment-submit-btn" onclick="addComment(${story.id})">Post</button>
+                        </div>
+                    </div>
                 </div>
             `;
+        }
+
+        function formatTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            if (diffHours < 24) return `${diffHours}h ago`;
+            if (diffDays < 7) return `${diffDays}d ago`;
+
+            return date.toLocaleDateString();
         }
 
         function filterStories(filter) {
@@ -993,9 +1980,135 @@
             }
         }
 
+        function toggleComments(storyId) {
+            const commentsSection = document.getElementById(`comments-${storyId}`);
+            if (commentsSection.style.display === 'none') {
+                commentsSection.style.display = 'block';
+                loadComments(storyId);
+            } else {
+                commentsSection.style.display = 'none';
+            }
+        }
+
+        async function loadComments(storyId) {
+            try {
+                const commentsContainer = document.getElementById(`comments-container-${storyId}`);
+                commentsContainer.innerHTML = '<div style="text-align: center; padding: 2rem; color: #7f8c8d;">Loading comments...</div>';
+
+                const response = await apiClient.getComments(storyId);
+                const comments = response.comments || [];
+
+                if (comments.length === 0) {
+                    commentsContainer.innerHTML = '<div style="text-align: center; padding: 2rem; color: #7f8c8d;">No comments yet. Be the first to comment!</div>';
+                    return;
+                }
+
+                commentsContainer.innerHTML = comments.map(comment => `
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">${comment.author_name || 'Anonymous'}</span>
+                            <span class="comment-time">${formatTimeAgo(new Date(comment.created_at))}</span>
+                        </div>
+                        <div class="comment-content">${comment.content}</div>
+                        ${comment.replies && comment.replies.length > 0 ?
+                            comment.replies.map(reply => `
+                                <div class="comment" style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <div class="comment-header">
+                                        <span class="comment-author">${reply.author_name || 'Anonymous'}</span>
+                                        <span class="comment-time">${formatTimeAgo(new Date(reply.created_at))}</span>
+                                    </div>
+                                    <div class="comment-content">${reply.content}</div>
+                                </div>
+                            `).join('') : ''}
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Failed to load comments:', error);
+                const commentsContainer = document.getElementById(`comments-container-${storyId}`);
+                commentsContainer.innerHTML = '<div style="text-align: center; padding: 2rem; color: #e74c3c;">Failed to load comments. Please try again.</div>';
+            }
+        }
+
+        async function addComment(storyId) {
+            try {
+                const commentText = document.getElementById(`comment-text-${storyId}`).value.trim();
+                if (!commentText) {
+                    showMessage('Please enter a comment', 'error');
+                    return;
+                }
+
+                const submitBtn = document.querySelector(`#comments-${storyId} .comment-submit-btn`);
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Posting...';
+
+                const response = await apiClient.createComment(storyId, commentText);
+
+                // Clear input
+                document.getElementById(`comment-text-${storyId}`).value = '';
+
+                // Update comment count
+                const commentCount = document.getElementById(`comment-count-${storyId}`);
+                commentCount.textContent = parseInt(commentCount.textContent) + 1;
+
+                // Reload comments
+                await loadComments(storyId);
+
+                showMessage('Comment posted successfully!', 'success');
+
+            } catch (error) {
+                console.error('Failed to add comment:', error);
+                showMessage('Failed to post comment. Please try again.', 'error');
+            } finally {
+                const submitBtn = document.querySelector(`#comments-${storyId} .comment-submit-btn`);
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Post';
+                }
+            }
+        }
+
+        function handleNewComment(comment) {
+            const commentsSection = document.getElementById(`comments-${comment.story_id}`);
+            if (commentsSection && commentsSection.style.display === 'block') {
+                // Add new comment to the top of the list
+                const commentsContainer = document.getElementById(`comments-container-${comment.story_id}`);
+                const newCommentHtml = `
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">${comment.author_name || 'Anonymous'}</span>
+                            <span class="comment-time">Just now</span>
+                        </div>
+                        <div class="comment-content">${comment.content}</div>
+                    </div>
+                `;
+                commentsContainer.insertAdjacentHTML('afterbegin', newCommentHtml);
+            }
+        }
+
+        function handleNewReply(data) {
+            const commentsSection = document.getElementById(`comments-${data.story_id}`);
+            if (commentsSection && commentsSection.style.display === 'block') {
+                // Find the parent comment and add the reply
+                const parentComment = document.querySelector(`#comments-container-${data.story_id} .comment`);
+                if (parentComment) {
+                    const replyHtml = `
+                        <div class="comment" style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <div class="comment-header">
+                                <span class="comment-author">${data.author_name || 'Anonymous'}</span>
+                                <span class="comment-time">Just now</span>
+                            </div>
+                            <div class="comment-content">${data.content}</div>
+                        </div>
+                    `;
+                    parentComment.insertAdjacentHTML('beforeend', replyHtml);
+                }
+            }
+        }
+
         function shareStory(storyId) {
             // In a real app, this would generate a unique URL for the story
-            const story = sampleStories.find(s => s.id === storyId);
+            const story = storyResponse;
             if (navigator.share) {
                 navigator.share({
                     title: `A Story of Economic Justice`,
@@ -1025,7 +2138,7 @@
 
             // Create new story object
             const newStory = {
-                id: sampleStories.length + 1,
+                id: Date.now(), // Temporary ID until backend provides one
                 author: author,
                 time: 'Just now',
                 type: currentStoryType,
@@ -1035,7 +2148,7 @@
             };
 
             // Add to beginning of stories array
-            sampleStories.unshift(newStory);
+            // Story is already added to backend via API call
 
             // Reload stories
             loadStories();
@@ -1181,8 +2294,8 @@
 
         // Add story count and impact metrics
         function updateMetrics() {
-            const totalStories = sampleStories.length;
-            const totalLikes = sampleStories.reduce((sum, story) => sum + story.likes, 0);
+            const totalStories = stories.length;
+            const totalLikes = stories.reduce((sum, story) => sum + (story.like_count || story.likes || 0), 0);
 
             // Create metrics display
             const metricsDiv = document.createElement('div');
@@ -1282,6 +2395,1057 @@
             originalSubmitStory();
             clearDraft();
         };
+    </script>
+
+    <!-- API Client Integration -->
+    <script src="assets/js/api-client.js"></script>
+    <script src="assets/js/network-client.js"></script>
+
+    <!-- Tally Network Integration -->
+    <script src="assets/js/tally-network.js"></script>
+    <script>
+        // Initialize Tally Network for Story Platform
+        function initializeTallyNetwork() {
+            if (window.TallyNetwork) {
+                const tallyNetwork = new TallyNetwork();
+
+                // Register story platform with the network
+                tallyNetwork.registerPlatform('story-platform', {
+                    name: 'Story Sharing Platform',
+                    description: 'Community story sharing and economic justice narratives',
+                    features: ['story-sharing', 'community-engagement', 'economic-narratives']
+                });
+
+                // Listen for tally updates
+                tallyNetwork.onTallyUpdate((update) => {
+                    console.log('Tally network update:', update);
+
+                    // Update UI with current tally status
+                    updateTallyStatusUI(update);
+
+                    // Show notification for significant events
+                    if (update.event === 'tally_revolution_started' ||
+                        update.event === 'major_milestone_reached') {
+                        showMessage(`🌍 Tally Revolution: ${update.message}`, 'info');
+                    }
+                });
+
+                // Track story submissions as economic justice contributions
+                const originalSubmitStory = window.submitStory;
+                window.submitStory = async function() {
+                    try {
+                        const result = await originalSubmitStory.apply(this, arguments);
+
+                        // Record story submission as contribution to tally economy
+                        if (tallyNetwork) {
+                            tallyNetwork.recordContribution('story_submission', {
+                                story_type: currentStoryType,
+                                platform: 'story-platform',
+                                timestamp: Date.now()
+                            });
+                        }
+
+                        return result;
+                    } catch (error) {
+                        console.error('Error in enhanced submitStory:', error);
+                        throw error;
+                    }
+                };
+
+                console.log('Tally Network initialized for Story Platform');
+            } else {
+                console.warn('Tally Network library not loaded');
+            }
+        }
+
+        function updateTallyStatusUI(tallyData) {
+            // Create or update tally status display
+            let statusElement = document.getElementById('tally-network-status');
+            if (!statusElement) {
+                statusElement = document.createElement('div');
+                statusElement.id = 'tally-network-status';
+                statusElement.style.cssText = `
+                    position: fixed;
+                    bottom: 1rem;
+                    left: 1rem;
+                    background: rgba(52, 152, 219, 0.9);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    z-index: 1000;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                `;
+                document.body.appendChild(statusElement);
+            }
+
+            const participants = tallyData.participants || 0;
+            const contributions = tallyData.total_contributions || 0;
+            statusElement.innerHTML = `🌍 ${participants} participants | ${contributions} contributions`;
+            statusElement.title = `Tally Network: ${tallyData.message || 'Economic justice in progress'}`;
+        }
+    </script>
+
+    <!-- Socket.io Client for Real-time Updates -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+    <script>
+        // Backend API Integration
+        const apiClient = window.APIClient;
+        const networkClient = window.NetworkClient;
+
+        // Socket.io for real-time updates
+        let socket = null;
+        let isSocketConnected = false;
+
+        // Initialize Socket.io connection
+        function initializeSocketIO() {
+            try {
+                // Connect to Socket.io server
+                socket = io('http://localhost:3000', {
+                    transports: ['websocket', 'polling'],
+                    reconnection: true,
+                    reconnectionAttempts: 5,
+                    reconnectionDelay: 1000,
+                    timeout: 20000
+                });
+
+                // Connection event handlers
+                socket.on('connect', () => {
+                    console.log('🔌 Connected to real-time server');
+                    isSocketConnected = true;
+                    updateConnectionStatus();
+                    // Join the stories room
+                    socket.emit('join-stories-room');
+                });
+
+                socket.on('disconnect', (reason) => {
+                    console.log('🔌 Disconnected from server:', reason);
+                    isSocketConnected = false;
+                    updateConnectionStatus();
+                });
+
+                socket.on('connect_error', (error) => {
+                    console.error('🔌 Connection error:', error);
+                    isSocketConnected = false;
+                    updateConnectionStatus();
+                });
+
+                socket.on('reconnect', (attemptNumber) => {
+                    console.log(`🔌 Reconnected after ${attemptNumber} attempts`);
+                    isSocketConnected = true;
+                    updateConnectionStatus();
+                    socket.emit('join-stories-room');
+                });
+
+                // Real-time story events
+                socket.on('story-published', (story) => {
+                    console.log('📖 New story published:', story);
+                    handleNewStory(story);
+                });
+
+                socket.on('story-liked', (data) => {
+                    console.log('❤️ Story liked:', data);
+                    updateStoryLikes(data.storyId, data.likes);
+                });
+
+                socket.on('story-shared', (data) => {
+                    console.log('📤 Story shared:', data);
+                    updateStoryShares(data.storyId, data.shares);
+                });
+
+                socket.on('new-comment', (comment) => {
+                    console.log('💬 New comment:', comment);
+                    // Handle new comment notification and update UI
+                    if (comment.story_id) {
+                        const commentCount = document.getElementById(`comment-count-${comment.story_id}`);
+                        if (commentCount) {
+                            commentCount.textContent = parseInt(commentCount.textContent) + 1;
+                        }
+
+                        // If comments section is open, reload comments
+                        const commentsSection = document.getElementById(`comments-${comment.story_id}`);
+                        if (commentsSection && commentsSection.style.display === 'block') {
+                            loadComments(comment.story_id);
+                        }
+
+                        showMessage(`New comment on story #${comment.story_id}`, 'info');
+                    }
+                });
+
+                socket.on('comment-added', (comment) => {
+                    console.log('💬 Comment added:', comment);
+                    handleNewComment(comment);
+                });
+
+                socket.on('reply-added', (data) => {
+                    console.log('💬 Reply added:', data);
+                    handleNewReply(data);
+                });
+
+                socket.on('user-joined', (userData) => {
+                    console.log('👤 User joined:', userData);
+                    showMessage(`${userData.displayName || 'A user'} joined the platform`, 'info');
+                });
+
+            } catch (error) {
+                console.error('Failed to initialize Socket.io:', error);
+            }
+        }
+
+        // Update connection status UI
+        function updateConnectionStatus() {
+            const statusElement = document.getElementById('connection-status') || createConnectionStatusUI();
+            if (isSocketConnected) {
+                statusElement.innerHTML = '<span style="color: #27ae60;">🟢 Live</span>';
+                statusElement.title = 'Connected to real-time server';
+            } else {
+                statusElement.innerHTML = '<span style="color: #e74c3c;">🔴 Offline</span>';
+                statusElement.title = 'Disconnected from real-time server';
+            }
+        }
+
+        // Create connection status UI if it doesn't exist
+        function createConnectionStatusUI() {
+            const statusElement = document.createElement('div');
+            statusElement.id = 'connection-status';
+            statusElement.style.cssText = `
+                position: fixed;
+                bottom: 1rem;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                backdrop-filter: blur(10px);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            `;
+
+            // Add click handler to show detailed network status
+            statusElement.onclick = toggleNetworkStatusPanel;
+            statusElement.title = 'Click for detailed network status';
+
+            document.body.appendChild(statusElement);
+            return statusElement;
+        }
+
+        // Network status panel management
+        function toggleNetworkStatusPanel() {
+            const panel = document.getElementById('network-status-panel');
+            if (panel) {
+                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            } else {
+                createNetworkStatusPanel();
+            }
+        }
+
+        function createNetworkStatusPanel() {
+            const panel = document.createElement('div');
+            panel.id = 'network-status-panel';
+            panel.style.cssText = `
+                position: fixed;
+                bottom: 4rem;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1.5rem;
+                border-radius: 15px;
+                font-size: 0.9rem;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(0,0,0,0.1);
+                min-width: 300px;
+                max-height: 400px;
+                overflow-y: auto;
+            `;
+
+            panel.innerHTML = `
+                <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; color: #2c3e50;">🌐 Network Status</h3>
+                    <button onclick="document.getElementById('network-status-panel').style.display='none'"
+                            style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #7f8c8d;">
+                        ×
+                    </button>
+                </div>
+                <div id="network-status-content">
+                    <div class="network-stat">
+                        <span class="stat-label">Real-time Connection:</span>
+                        <span id="socket-status" class="stat-value">Checking...</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-label">Active Peers:</span>
+                        <span id="peer-count" class="stat-value">0</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-label">Connections:</span>
+                        <span id="connection-count" class="stat-value">0</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-label">Latency:</span>
+                        <span id="network-latency" class="stat-value">-- ms</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-label">Bandwidth:</span>
+                        <span id="network-bandwidth" class="stat-value">-- Mbps</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-label">Uptime:</span>
+                        <span id="network-uptime" class="stat-value">--</span>
+                    </div>
+                    <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e9ecef;">
+                    <div style="text-align: center;">
+                        <button onclick="refreshNetworkStatus()"
+                                style="background: #3498db; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                            🔄 Refresh
+                        </button>
+                        <button onclick="runNetworkDiagnostics()"
+                                style="background: #27ae60; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin-left: 0.5rem;">
+                            📊 Diagnostics
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Add CSS for network stats
+            const style = document.createElement('style');
+            style.textContent = `
+                .network-stat {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 0.5rem;
+                    padding: 0.3rem 0;
+                }
+                .stat-label {
+                    color: #7f8c8d;
+                    font-weight: 500;
+                }
+                .stat-value {
+                    color: #2c3e50;
+                    font-weight: 600;
+                }
+                #network-status-panel::-webkit-scrollbar {
+                    width: 6px;
+                }
+                #network-status-panel::-webkit-scrollbar-track {
+                    background: rgba(0,0,0,0.1);
+                    border-radius: 3px;
+                }
+                #network-status-panel::-webkit-scrollbar-thumb {
+                    background: rgba(0,0,0,0.2);
+                    border-radius: 3px;
+                }
+            `;
+            document.head.appendChild(style);
+
+            document.body.appendChild(panel);
+
+            // Initial status update
+            updateNetworkStatusPanel();
+
+            // Start periodic updates
+            startNetworkStatusUpdates();
+        }
+
+        let networkStatusInterval;
+        function startNetworkStatusUpdates() {
+            if (networkStatusInterval) {
+                clearInterval(networkStatusInterval);
+            }
+            networkStatusInterval = setInterval(updateNetworkStatusPanel, 5000);
+        }
+
+        async function updateNetworkStatusPanel() {
+            const panel = document.getElementById('network-status-panel');
+            if (!panel || panel.style.display === 'none') return;
+
+            try {
+                // Update Socket.io status
+                const socketStatus = document.getElementById('socket-status');
+                if (socketStatus) {
+                    socketStatus.textContent = isSocketConnected ? '🟢 Connected' : '🔴 Disconnected';
+                    socketStatus.style.color = isSocketConnected ? '#27ae60' : '#e74c3c';
+                }
+
+                // Get network status from network client
+                const networkStatus = networkClient.getNetworkStatus();
+
+                // Update peer count
+                const peerCount = document.getElementById('peer-count');
+                if (peerCount) peerCount.textContent = networkStatus.peers;
+
+                // Update connection count
+                const connectionCount = document.getElementById('connection-count');
+                if (connectionCount) connectionCount.textContent = networkStatus.connections;
+
+                // Update latency
+                const latencyElement = document.getElementById('network-latency');
+                if (latencyElement) {
+                    latencyElement.textContent = networkStatus.connectionState.latency
+                        ? `${networkStatus.connectionState.latency} ms`
+                        : '-- ms';
+                }
+
+                // Update bandwidth
+                const bandwidthElement = document.getElementById('network-bandwidth');
+                if (bandwidthElement) {
+                    const bandwidthMbps = networkStatus.connectionState.bandwidth
+                        ? (networkStatus.connectionState.bandwidth / 1000000).toFixed(1)
+                        : '--';
+                    bandwidthElement.textContent = `${bandwidthMbps} Mbps`;
+                }
+
+                // Update uptime (simple implementation)
+                const uptimeElement = document.getElementById('network-uptime');
+                if (uptimeElement && networkStatus.timestamp) {
+                    const uptimeMs = Date.now() - networkStatus.timestamp;
+                    const uptimeMins = Math.floor(uptimeMs / 60000);
+                    uptimeElement.textContent = uptimeMins > 0
+                        ? `${uptimeMins}m`
+                        : `${Math.floor(uptimeMs / 1000)}s`;
+                }
+
+            } catch (error) {
+                console.error('Failed to update network status:', error);
+            }
+        }
+
+        function refreshNetworkStatus() {
+            updateNetworkStatusPanel();
+            showMessage('Network status refreshed', 'info');
+        }
+
+        async function runNetworkDiagnostics() {
+            try {
+                showMessage('Running network diagnostics...', 'info');
+                const diagnostics = await networkClient.performNetworkDiagnostics();
+
+                // Show diagnostics results
+                const panel = document.getElementById('network-status-panel');
+                if (panel) {
+                    const content = document.getElementById('network-status-content');
+                    content.innerHTML += `
+                        <hr style="margin: 1rem 0;">
+                        <div style="margin-top: 1rem;">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #2c3e50;">Diagnostics Results</h4>
+                            <div style="font-size: 0.8rem; color: #7f8c8d;">
+                                <div>Latency: ${Object.values(diagnostics.latency || {}).join(', ') || 'N/A'}</div>
+                                <div>Peers: ${diagnostics.peers?.length || 0} available</div>
+                                <div>Throughput: ${diagnostics.throughput?.throughput || 'N/A'} bps</div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                showMessage('Network diagnostics completed', 'success');
+            } catch (error) {
+                console.error('Network diagnostics failed:', error);
+                showMessage('Failed to run diagnostics', 'error');
+            }
+        }
+
+        // Handle new story from real-time event
+        function handleNewStory(story) {
+            // Add new story to the top of the feed
+            const container = document.getElementById('stories-container');
+            if (container) {
+                const storyCard = createStoryCard(story);
+                // Insert at the top (after metrics if they exist)
+                const metricsDiv = container.querySelector('.metrics-display');
+                if (metricsDiv) {
+                    metricsDiv.insertAdjacentHTML('afterend', storyCard);
+                } else {
+                    container.insertAdjacentHTML('afterbegin', storyCard);
+                }
+
+                // Show notification
+                showMessage(`New story from ${story.author_name || 'Anonymous'}!`, 'success');
+
+                // Update metrics
+                updateMetrics();
+            }
+        }
+
+        // Update story likes from real-time event
+        function updateStoryLikes(storyId, newLikeCount) {
+            const likesElement = document.getElementById(`likes-${storyId}`);
+            const heartElement = document.getElementById(`heart-${storyId}`);
+            if (likesElement) {
+                likesElement.textContent = newLikeCount;
+            }
+            if (heartElement && heartElement.textContent === '🤍') {
+                heartElement.textContent = '❤️';
+                heartElement.parentElement.classList.add('liked');
+            }
+        }
+
+        // Update story shares from real-time event
+        function updateStoryShares(storyId, newShareCount) {
+            // Could add share count display if needed
+            console.log(`Story ${storyId} now has ${newShareCount} shares`);
+        }
+
+        // Modified functions for backend integration
+        async function loadStories() {
+            try {
+                const container = document.getElementById('stories-container');
+
+                // Show skeleton loading state
+                container.innerHTML = `
+                    <div class="skeleton-story">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <div class="skeleton skeleton-avatar"></div>
+                            <div style="flex: 1;">
+                                <div class="skeleton skeleton-line short"></div>
+                                <div class="skeleton skeleton-line shorter" style="width: 40%; height: 0.8rem;"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton skeleton-line long"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                        <div class="skeleton skeleton-line short"></div>
+                    </div>
+                    <div class="skeleton-story">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <div class="skeleton skeleton-avatar"></div>
+                            <div style="flex: 1;">
+                                <div class="skeleton skeleton-line short"></div>
+                                <div class="skeleton skeleton-line shorter" style="width: 40%; height: 0.8rem;"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton skeleton-line long"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                        <div class="skeleton skeleton-line short"></div>
+                    </div>
+                    <div class="skeleton-story">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <div class="skeleton skeleton-avatar"></div>
+                            <div style="flex: 1;">
+                                <div class="skeleton skeleton-line short"></div>
+                                <div class="skeleton skeleton-line shorter" style="width: 40%; height: 0.8rem;"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton skeleton-line long"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                        <div class="skeleton skeleton-line short"></div>
+                    </div>
+                `;
+
+                // Fetch stories from backend
+                const response = await apiClient.getStories();
+                const stories = response.stories || [];
+
+                if (stories.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">📝</div>
+                            <p>No stories yet. Be the first to share your experience!</p>
+                            <p style="margin-top: 1rem; color: #7f8c8d;">Your story could inspire others to take action.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render stories
+                container.innerHTML = stories.map(story => createStoryCard(story)).join('');
+
+                // Update metrics
+                updateMetrics(stories);
+
+            } catch (error) {
+                console.error('Failed to load stories:', error);
+                const container = document.getElementById('stories-container');
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">❌</div>
+                        <p>Failed to load stories. Please try again later.</p>
+                        <button onclick="loadStories()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Form validation functions
+        function validateStoryContent(content) {
+            const minLength = 10;
+            const maxLength = 5000;
+
+            if (!content || content.trim().length < minLength) {
+                return {
+                    valid: false,
+                    message: `Story must be at least ${minLength} characters long`
+                };
+            }
+
+            if (content.length > maxLength) {
+                return {
+                    valid: false,
+                    message: `Story must be less than ${maxLength} characters`
+                };
+            }
+
+            return { valid: true };
+        }
+
+        function validateAuthorName(author) {
+            if (author && author.length > 100) {
+                return {
+                    valid: false,
+                    message: 'Author name must be less than 100 characters'
+                };
+            }
+
+            // Check for inappropriate content (basic example)
+            const inappropriatePatterns = [/\b(fuck|shit|asshole|bitch|cunt)\b/i];
+            if (author && inappropriatePatterns.some(pattern => pattern.test(author))) {
+                return {
+                    valid: false,
+                    message: 'Please use respectful language in your name'
+                };
+            }
+
+            return { valid: true };
+        }
+
+        function updateValidationUI() {
+            const content = getStoryContent();
+            const author = document.getElementById('author-input').value.trim();
+            const submitBtn = document.getElementById('submit-btn');
+
+            const contentValidation = validateStoryContent(content);
+            const authorValidation = validateAuthorName(author);
+
+            // Update content validation UI
+            const contentInput = document.getElementById('text-input');
+            if (contentInput) {
+                if (!contentValidation.valid) {
+                    contentInput.style.borderColor = '#e74c3c';
+                    contentInput.title = contentValidation.message;
+                } else {
+                    contentInput.style.borderColor = '';
+                    contentInput.title = '';
+                }
+            }
+
+            // Update author validation UI
+            const authorInput = document.getElementById('author-input');
+            if (authorInput) {
+                if (!authorValidation.valid) {
+                    authorInput.style.borderColor = '#e74c3c';
+                    authorInput.title = authorValidation.message;
+                } else {
+                    authorInput.style.borderColor = '';
+                    authorInput.title = '';
+                }
+            }
+
+            // Update submit button state
+            submitBtn.disabled = !contentValidation.valid || !authorValidation.valid;
+
+            // Show character count
+            updateCharacterCount(content);
+        }
+
+        function updateCharacterCount(content) {
+            let countElement = document.getElementById('character-count');
+            if (!countElement) {
+                countElement = document.createElement('div');
+                countElement.id = 'character-count';
+                countElement.style.cssText = 'font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem; text-align: right;';
+                const creationArea = document.getElementById('creation-area');
+                if (creationArea) {
+                    creationArea.appendChild(countElement);
+                }
+            }
+
+            const minLength = 10;
+            const currentLength = content.length;
+            countElement.textContent = `${currentLength} characters (minimum ${minLength})`;
+
+            if (currentLength < minLength) {
+                countElement.style.color = '#e74c3c';
+            } else if (currentLength > 4000) {
+                countElement.style.color = '#f39c12';
+            } else {
+                countElement.style.color = '#27ae60';
+            }
+        }
+
+        async function submitStory() {
+            const content = getStoryContent();
+            const author = document.getElementById('author-input').value.trim() || 'Anonymous';
+
+            // Enhanced validation
+            const contentValidation = validateStoryContent(content);
+            const authorValidation = validateAuthorName(author);
+
+            if (!contentValidation.valid) {
+                showMessage(contentValidation.message, 'error');
+                return;
+            }
+
+            if (!authorValidation.valid) {
+                showMessage(authorValidation.message, 'error');
+                return;
+            }
+
+            // Disable submit button during submission
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sharing...';
+
+            try {
+                // Prepare story data for backend
+                const storyData = {
+                    title: content.substring(0, 100) + (content.length > 100 ? '...' : ''),
+                    content: content,
+                    category: currentStoryType,
+                    tags: [currentStoryType, 'economic-justice']
+                };
+
+                // Submit to backend
+                const newStory = await apiClient.createStory(storyData);
+
+                // Track engagement
+                await apiClient.trackEngagement('story_created', {
+                    story_id: newStory.id,
+                    story_type: currentStoryType,
+                    content_length: content.length
+                });
+
+                // Emit socket event for real-time broadcasting
+                if (socket && isSocketConnected) {
+                    socket.emit('story-publish', newStory);
+                }
+
+                // Show success message
+                showMessage('Your story has been shared! Thank you for your courage in speaking out. 🙏', 'success');
+
+                // Reload stories to include the new one
+                await loadStories();
+
+                // Reset form
+                clearForm();
+
+                // Scroll to top to see new story
+                document.querySelector('.story-feed').scrollTop = 0;
+
+            } catch (error) {
+                console.error('Failed to submit story:', error);
+                showMessage('Failed to share your story. Please try again.', 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Share My Story';
+            }
+        }
+
+        async function toggleLike(storyId) {
+            try {
+                const heart = document.getElementById(`heart-${storyId}`);
+                const likesCount = document.getElementById(`likes-${storyId}`);
+                const currentLikes = parseInt(likesCount.textContent);
+
+                if (heart.textContent === '🤍') {
+                    // Like the story
+                    const response = await apiClient.likeStory(storyId);
+
+                    heart.textContent = '❤️';
+                    likesCount.textContent = response.likes || currentLikes + 1;
+                    heart.parentElement.classList.add('liked');
+
+                    // Track engagement
+                    await apiClient.trackEngagement('story_liked', { story_id: storyId });
+
+                    // Emit socket event for real-time update
+                    if (socket && isSocketConnected) {
+                        socket.emit('story-like', {
+                            storyId: storyId,
+                            likes: response.likes || currentLikes + 1
+                        });
+                    }
+
+                    showMessage('Thank you for showing solidarity! 💪', 'success');
+                } else {
+                    // Unlike the story (would need backend support for unliking)
+                    heart.textContent = '🤍';
+                    likesCount.textContent = currentLikes - 1;
+                    heart.parentElement.classList.remove('liked');
+
+                    showMessage('Like removed', 'info');
+                }
+            } catch (error) {
+                console.error('Failed to toggle like:', error);
+                showMessage('Failed to update like. Please try again.', 'error');
+            }
+        }
+
+        async function shareStory(storyId) {
+            try {
+                const storyResponse = await apiClient.getStory(storyId);
+                const story = storyResponse;
+
+                // Increment share count
+                const shareResponse = await apiClient.shareStory(storyId);
+
+                // Track engagement
+                await apiClient.trackEngagement('story_shared', { story_id: storyId });
+
+                // Emit socket event for real-time update
+                if (socket && isSocketConnected) {
+                    socket.emit('story-share', {
+                        storyId: storyId,
+                        shares: shareResponse.shares || 0
+                    });
+                }
+
+                if (navigator.share) {
+                    await navigator.share({
+                        title: `A Story of Economic Justice`,
+                        text: `"${story.content.substring(0, 100)}..." - ${story.author}`,
+                        url: `${window.location.origin}/story.html?id=${storyId}`
+                    });
+                } else {
+                    // Fallback - copy to clipboard
+                    await navigator.clipboard.writeText(
+                        `"${story.content}" - ${story.author}\n\nShare your story: ${window.location.origin}/story.html?id=${storyId}`
+                    );
+                    showMessage('Story link copied to clipboard!', 'success');
+                }
+            } catch (error) {
+                console.error('Failed to share story:', error);
+                if (error.name !== 'AbortError') {
+                    showMessage('Failed to share story. Please try again.', 'error');
+                }
+            }
+        }
+
+        async function supportUser(author) {
+            try {
+                // This could be enhanced with actual user connection functionality
+                showMessage(`Connection request sent to ${author}! Building solidarity one story at a time. 🤝`, 'success');
+
+                // Track engagement
+                await apiClient.trackEngagement('user_connection_request', { target_user: author });
+
+            } catch (error) {
+                console.error('Failed to send connection request:', error);
+            }
+        }
+
+        function updateMetrics(stories) {
+            const totalStories = stories.length;
+            const totalLikes = stories.reduce((sum, story) => sum + (story.like_count || story.likes || 0), 0);
+
+            // Update metrics display if it exists
+            const metricsDiv = document.querySelector('.metrics-display');
+            if (metricsDiv) {
+                metricsDiv.innerHTML = `
+                    <div style="display: flex; justify-content: space-around; align-items: center;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #3498db;">${totalStories}</div>
+                            <div style="font-size: 0.9rem; color: #7f8c8d;">Stories Shared</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #e74c3c;">${totalLikes}</div>
+                            <div style="font-size: 0.9rem; color: #7f8c8d;">Hearts Given</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #27ae60;">∞</div>
+                            <div style="font-size: 0.9rem; color: #7f8c8d;">Lives Changed</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Enhanced initialization with backend integration
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is authenticated
+            const isAuthenticated = apiClient.isAuthenticated();
+
+            if (!isAuthenticated) {
+                // Optional: Show login prompt or use guest mode
+                console.log('User not authenticated - using guest mode');
+            }
+
+            // Initialize authentication system
+            initializeAuth();
+
+            // Load stories from backend
+            await loadStories();
+
+            // Setup event listeners
+            setupEventListeners();
+
+            // Initialize Socket.io for real-time updates
+            initializeSocketIO();
+
+            // Initialize network client if needed
+            initializeNetworkFeatures();
+
+            // Initialize Tally Network for economic justice features
+            initializeTallyNetwork();
+        });
+
+        async function initializeNetworkFeatures() {
+            try {
+                // Check network status
+                const networkStatus = await networkClient.getNetworkStatus();
+                console.log('Network status:', networkStatus);
+
+                // Subscribe to network events for real-time updates
+                networkClient.subscribeToNetworkEvents((event) => {
+                    if (event.type === 'story_published') {
+                        // New story published - reload stories
+                        loadStories();
+                    }
+                });
+
+            } catch (error) {
+                console.warn('Network features not available:', error);
+            }
+        }
+
+        // Handle media uploads to backend
+        async function handleMediaUpload(file, mediaType) {
+            try {
+                const onProgress = (progress) => {
+                    console.log(`Upload progress: ${progress}%`);
+                    // Update UI with progress
+                };
+
+                const uploadResponse = await apiClient.uploadFile(file, onProgress);
+                return uploadResponse.fileUrl || uploadResponse.url;
+
+            } catch (error) {
+                console.error('Media upload failed:', error);
+                throw new Error('Failed to upload media');
+            }
+        }
+
+        // Enhanced getStoryContent with media upload
+        async function getStoryContent() {
+            if (currentMediaType === 'text') {
+                const textInput = document.getElementById('text-input');
+                return textInput ? textInput.value.trim() : '';
+            } else if (currentMediaType === 'audio') {
+                if (recordedChunks.length > 0) {
+                    try {
+                        // Convert recorded chunks to blob and upload
+                        const audioBlob = new Blob(recordedChunks, { type: 'audio/wav' });
+                        const audioUrl = await handleMediaUpload(audioBlob, 'audio');
+                        return `[Audio: ${audioUrl}]`;
+                    } catch (error) {
+                        showMessage('Failed to upload audio recording', 'error');
+                        return '';
+                    }
+                }
+                return '';
+            } else if (currentMediaType === 'video') {
+                const videoInput = document.getElementById('video-input');
+                if (videoInput && videoInput.files.length > 0) {
+                    try {
+                        const videoUrl = await handleMediaUpload(videoInput.files[0], 'video');
+                        return `[Video: ${videoUrl}]`;
+                    } catch (error) {
+                        showMessage('Failed to upload video', 'error');
+                        return '';
+                    }
+                }
+                return '';
+            }
+            return '';
+        }
+
+        // Tally Network Integration for Story Platform
+        function initializeTallyNetwork() {
+            if (window.TallyNetwork) {
+                const tallyNetwork = new TallyNetwork();
+
+                // Register story platform with the network
+                tallyNetwork.registerPlatform('story-platform', {
+                    name: 'Story Sharing Platform',
+                    description: 'Community story sharing and economic justice narratives',
+                    features: ['story-sharing', 'community-engagement', 'economic-narratives']
+                });
+
+                // Listen for tally updates
+                tallyNetwork.onTallyUpdate((update) => {
+                    console.log('Tally network update:', update);
+
+                    // Update UI with current tally status
+                    updateTallyStatusUI(update);
+
+                    // Show notification for significant events
+                    if (update.event === 'tally_revolution_started' ||
+                        update.event === 'major_milestone_reached') {
+                        showMessage(`🌍 Tally Revolution: ${update.message}`, 'info');
+                    }
+                });
+
+                // Track story submissions as economic justice contributions
+                const originalSubmitStory = window.submitStory;
+                window.submitStory = async function() {
+                    try {
+                        const result = await originalSubmitStory.apply(this, arguments);
+
+                        // Record story submission as contribution to tally economy
+                        if (tallyNetwork) {
+                            tallyNetwork.recordContribution('story_submission', {
+                                story_type: currentStoryType,
+                                platform: 'story-platform',
+                                timestamp: Date.now()
+                            });
+                        }
+
+                        return result;
+                    } catch (error) {
+                        console.error('Error in enhanced submitStory:', error);
+                        throw error;
+                    }
+                };
+
+                console.log('Tally Network initialized for Story Platform');
+            } else {
+                console.warn('Tally Network library not loaded');
+            }
+        }
+
+        function updateTallyStatusUI(tallyData) {
+            // Create or update tally status display
+            let statusElement = document.getElementById('tally-network-status');
+            if (!statusElement) {
+                statusElement = document.createElement('div');
+                statusElement.id = 'tally-network-status';
+                statusElement.style.cssText = `
+                    position: fixed;
+                    bottom: 1rem;
+                    left: 1rem;
+                    background: rgba(52, 152, 219, 0.9);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    z-index: 1000;
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                `;
+                document.body.appendChild(statusElement);
+            }
+
+            const participants = tallyData.participants || 0;
+            const contributions = tallyData.total_contributions || 0;
+            statusElement.innerHTML = `🌍 ${participants} participants | ${contributions} contributions`;
+            statusElement.title = `Tally Network: ${tallyData.message || 'Economic justice in progress'}`;
+        }
     </script>
 </body>
 </html>

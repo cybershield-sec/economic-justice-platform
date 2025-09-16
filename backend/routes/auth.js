@@ -43,11 +43,17 @@ router.post('/register', [
 
     const user = result.rows[0];
 
+    // Ensure JWT_SECRET is defined
+    if (!process.env.JWT_SECRET) {
+      console.error('❌ JWT_SECRET is not defined in environment variables');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
     // Generate JWT token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      process.env.JWT_SECRET || 'fallback-secret',
-      { expiresIn: '7d' }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
 
     res.status(201).json({
@@ -102,11 +108,17 @@ router.post('/login', [
       [user.id]
     );
 
+    // Ensure JWT_SECRET is defined
+    if (!process.env.JWT_SECRET) {
+      console.error('❌ JWT_SECRET is not defined in environment variables');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
     // Generate JWT token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      process.env.JWT_SECRET || 'fallback-secret',
-      { expiresIn: '7d' }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
 
     res.json({

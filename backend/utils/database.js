@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 
+// Create pool with better error handling
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   host: process.env.DB_HOST || 'localhost',
@@ -12,9 +13,21 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
 });
 
+// Add connection event listeners for better error handling
+pool.on('error', (err) => {
+  console.error('❌ Unexpected database error:', err);
+  console.error('Database connection lost, attempting to reconnect...');
+});
+
 // Initialize database tables
 const initDatabase = async () => {
   try {
+    console.log('🔍 Attempting database connection...');
+    // Test database connection first
+    const client = await pool.connect();
+    console.log('✅ Database connection established');
+    
+    console.log('🔍 Initializing database tables...');
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -75,9 +88,14 @@ const initDatabase = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
+    
+    client.release();
     console.log('✅ Database tables initialized');
   } catch (error) {
-    console.error('❌ Database initialization error:', error);
+    console.error('❌ Database initialization error:', error.message);
+    console.error('Error code:', error.code);
+    console.error('Error stack:', error.stack);
+    throw error;
   }
 };
 

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally Network - Monitor & Join the Economic Justice Platform</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --earth: #27ae60;
+            --community: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            background: linear-gradient(45deg, var(--accent), var(--secondary), var(--earth));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .revolution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .revolution-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .revolution-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        }
+
+        .tally-system {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .tally-display {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .tally-item {
+            background: linear-gradient(135deg, var(--light), white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tally-item:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .tally-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .user-tally { color: var(--accent); }
+        .network-tally { color: var(--secondary); }
+        .collective-tally { color: var(--earth); }
+        .global-tally { color: var(--community); }
+
+        .interactive-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent), #2980b9);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-revolution {
+            background: linear-gradient(135deg, var(--secondary), #c0392b);
+        }
+
+        .btn-earth {
+            background: linear-gradient(135deg, var(--earth), #229954);
+        }
+
+        .btn-community {
+            background: linear-gradient(135deg, var(--community), #e67e22);
+        }
+
+        .global-map {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .map-visualization {
+            height: 400px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .network-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .economic-manifesto {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 60px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .tally-display {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Tally Network</h1>
+            <p style="font-size: 1.4em; margin-top: 20px;">Monitor & Join the Global Economic Justice Platform</p>
+        </header>
+
+        <div class="revolution-grid">
+            <div class="revolution-card">
+                <h3>📡 Network Monitoring</h3>
+                <p>Real-time monitoring of the global tally network. Track nodes, transactions, and economic flow across the decentralized justice platform.</p>
+            </div>
+
+            <div class="revolution-card">
+                <h3>🤝 Join & Contribute</h3>
+                <p>Become part of the economic justice movement. Contribute resources, run tally servers, and help build a fairer global economic system.</p>
+            </div>
+
+            <div class="revolution-card">
+                <h3>⚖️ Resource Governance</h3>
+                <p>All resources are governed by the tally system - ensuring fair distribution, transparent allocation, and community-controlled economic power.</p>
+            </div>
+        </div>
+
+        <div class="tally-system">
+            <h2 style="font-size: 2.5em; margin-bottom: 30px;">📊 Live Network Dashboard</h2>
+
+            <div class="tally-display">
+                <div class="tally-item">
+                    <h4>👤 Active Users</h4>
+                    <div class="tally-value user-tally" id="user-tally">1.0</div>
+                    <p>Participants in the tally network</p>
+                </div>
+
+                <div class="tally-item">
+                    <h4>🌐 Network Nodes</h4>
+                    <div class="tally-value network-tally" id="network-tally">1.0</div>
+                    <p>Servers powering the tally system</p>
+                </div>
+
+                <div class="tally-item">
+                    <h4>🤝 Collective Resources</h4>
+                    <div class="tally-value collective-tally" id="collective-tally">2.0</div>
+                    <p>Shared resources under tally governance</p>
+                </div>
+
+                <div class="tally-item">
+                    <h4>🌍 Global Impact</h4>
+                    <div class="tally-value global-tally" id="global-tally">0.5</div>
+                    <p>Economic justice reach worldwide</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <button class="btn btn-earth" onclick="contributeResources()">🌐 Contribute Resources</button>
+                <button class="btn btn-community" onclick="joinAsUser()">🤝 Join as User</button>
+                <button class="btn" onclick="monitorNetwork()">📊 Monitor Live</button>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2 style="font-size: 2em; margin-bottom: 30px;">🚀 Join the Tally Network</h2>
+
+            <button class="btn btn-revolution" onclick="startTallyServer()">🖥️ Start Tally Server</button>
+            <button class="btn" onclick="joinAsNode()">🌐 Add Server Node</button>
+            <button class="btn btn-earth" onclick="contributeResources()">📦 Contribute Resources</button>
+
+            <div id="system-status" style="margin-top: 30px; padding: 20px; border-radius: 15px; background: rgba(0,0,0,0.05);">
+                <h4>Network Status</h4>
+                <div id="status-messages">
+                    <div>🔴 Tally Network: Offline</div>
+                    <div>🔴 Resource Pool: Empty</div>
+                    <div>🔴 Servers: 0 Active</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="global-map">
+            <h2 style="font-size: 2em; margin-bottom: 30px;">🗺️ Global Network Map</h2>
+
+            <div class="map-visualization" id="world-map">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <div style="font-size: 4em; margin-bottom: 20px;">🌐</div>
+                    <p style="color: white; font-size: 1.2em;">Tally Network Monitoring</p>
+                    <div id="global-stats" style="color: white; font-size: 1.5em; margin-top: 20px;">
+                        <div>Nodes: <span id="node-count">1</span></div>
+                        <div>Resources: <span id="tx-count">3</span> GB</div>
+                        <div>Throughput: <span id="value-created">4.5</span> MB/s</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button class="btn" onclick="simulateGrowth()">📈 Simulate Growth</button>
+                <button class="btn btn-earth" onclick="viewResources()">📦 View Available Resources</button>
+            </div>
+        </div>
+
+        <div class="economic-manifesto">
+            <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 40px;">📋 Join the Tally Network</h2>
+
+            <div style="font-size: 1.2em; line-height: 1.8;">
+                <p style="margin-bottom: 20px;">
+                    <strong>Monitor</strong> the global tally network in real-time. Track server nodes, resource allocation, and economic flow across the decentralized justice platform.
+                </p>
+
+                <p style="margin-bottom: 20px;">
+                    <strong>Contribute</strong> resources to the network - storage, bandwidth, or computing power. All resources are governed by the tally system ensuring fair distribution.
+                </p>
+
+                <p style="margin-bottom: 20px;">
+                    <strong>Join</strong> the movement for economic justice. Run tally servers, participate in resource governance, and help build a fairer global economic system.
+                </p>
+
+                <p style="text-align: center; margin-top: 40px; font-style: italic; font-size: 1.3em;">
+                    "The tally system governs all resources - ensuring transparency, fairness, and community control."
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p style="font-size: 1.4em; margin-bottom: 20px;">📊 Tally Network Monitoring</p>
+            <p>Join and contribute to the economic justice platform - all resources governed by the tally system</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tally network state
+        const tallyNetwork = {
+            users: 1.0,
+            nodes: 1.0,
+            resources: 2.0,
+            impact: 0.5,
+            serverCount: 1,
+            totalResources: 3,
+            throughput: 4.5,
+            activated: false,
+
+            transactions: [
+                { from: 'system', to: 'users', amount: 1.0, narrative: 'First user joined the network' },
+                { from: 'infrastructure', to: 'nodes', amount: 1.0, narrative: 'Initial server node established' },
+                { from: 'community', to: 'resources', amount: 2.0, narrative: 'Initial resources pooled' },
+                { from: 'network', to: 'impact', amount: 0.5, narrative: 'Global impact initiated' }
+            ]
+        };
+
+        // Update all displays
+        function updateNetworkDisplay() {
+            document.getElementById('user-tally').textContent = tallyNetwork.users.toFixed(1);
+            document.getElementById('network-tally').textContent = tallyNetwork.nodes.toFixed(1);
+            document.getElementById('collective-tally').textContent = tallyNetwork.resources.toFixed(1);
+            document.getElementById('global-tally').textContent = tallyNetwork.impact.toFixed(1);
+
+            document.getElementById('node-count').textContent = tallyNetwork.serverCount;
+            document.getElementById('tx-count').textContent = tallyNetwork.totalResources;
+            document.getElementById('value-created').textContent = tallyNetwork.throughput.toFixed(1);
+        }
+
+        // Network actions
+        function contributeResources() {
+            const contribution = 0.2 + (Math.random() * 0.3);
+            tallyNetwork.users -= contribution;
+            tallyNetwork.resources += contribution;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += contribution;
+
+            tallyNetwork.transactions.push({
+                from: 'user', to: 'resources', amount: contribution,
+                narrative: 'User contributed resources to the network pool'
+            });
+
+            updateNetworkDisplay();
+            animateButton(event.target, '📦 Resources Added');
+        }
+
+        function joinAsUser() {
+            const support = 0.15 + (Math.random() * 0.25);
+            tallyNetwork.users += support;
+            tallyNetwork.nodes += support;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += support;
+
+            tallyNetwork.transactions.push({
+                from: 'system', to: 'user', amount: support,
+                narrative: 'New user joined and strengthened the network'
+            });
+
+            updateNetworkDisplay();
+            animateButton(event.target, '🤝 Welcome to Network');
+        }
+
+        function monitorNetwork() {
+            const newValue = 0.3 + (Math.random() * 0.4);
+            tallyNetwork.users += newValue * 0.6;
+            tallyNetwork.nodes += newValue * 0.2;
+            tallyNetwork.resources += newValue * 0.2;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += newValue;
+
+            tallyNetwork.transactions.push({
+                from: 'monitoring', to: 'network', amount: newValue,
+                narrative: 'Network monitoring improved system efficiency'
+            });
+
+            updateNetworkDisplay();
+            animateButton(event.target, '📊 Monitoring Active');
+        }
+
+        function startTallyServer() {
+            tallyNetwork.activated = true;
+            tallyNetwork.serverCount += 3;
+            tallyNetwork.nodes += 0.8;
+            tallyNetwork.totalResources += 2;
+            tallyNetwork.throughput += 1.2;
+
+            document.getElementById('status-messages').innerHTML = `
+                <div style="color: var(--success);">🟢 Tally Network: Active (${tallyNetwork.serverCount} servers)</div>
+                <div style="color: var(--success);">🟢 Resource Pool: 2 GB Available</div>
+                <div style="color: var(--success);">🟢 Servers: ${tallyNetwork.serverCount} Active</div>
+            `;
+
+            tallyNetwork.transactions.push(
+                {
+                    from: 'activation', to: 'nodes', amount: 0.8,
+                    narrative: 'Tally server activated - network capacity increased'
+                },
+                {
+                    from: 'infrastructure', to: 'resources', amount: 0.4,
+                    narrative: 'Server resources added to the network pool'
+                }
+            );
+
+            updateNetworkDisplay();
+            animateButton(event.target, '🖥️ Server Running');
+            event.target.disabled = true;
+
+            // Start periodic network growth
+            setInterval(autoGrowNetwork, 8000);
+        }
+
+        function joinAsNode() {
+            tallyNetwork.serverCount++;
+            tallyNetwork.users += 0.5;
+            tallyNetwork.nodes += 0.1;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += 0.6;
+
+            tallyNetwork.transactions.push({
+                from: 'network', to: 'user', amount: 0.5,
+                narrative: 'New server node joined the tally network'
+            });
+
+            updateNetworkDisplay();
+            animateButton(event.target, '🌐 Node Added');
+
+            // Add node to map visualization
+            addNetworkNode();
+        }
+
+        function viewResources() {
+            const resources = 0.7 + (Math.random() * 0.5);
+            tallyNetwork.resources += resources * 0.6;
+            tallyNetwork.impact += resources * 0.4;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += resources;
+
+            document.getElementById('status-messages').innerHTML = `
+                <div style="color: var(--success);">🟢 Tally Network: Active (${tallyNetwork.serverCount} servers)</div>
+                <div style="color: var(--success);">🟢 Resource Pool: ${(tallyNetwork.resources * 10).toFixed(0)} GB Available</div>
+                <div style="color: var(--success);">🟢 Throughput: ${tallyNetwork.throughput.toFixed(1)} MB/s</div>
+            `;
+
+            tallyNetwork.transactions.push({
+                from: 'system', to: 'resources', amount: resources,
+                narrative: 'Resource allocation viewed - system transparency increased'
+            });
+
+            updateNetworkDisplay();
+            animateButton(event.target, '📦 Resources Available');
+        }
+
+        function simulateGrowth() {
+            const growthFlow = 0.4 + (Math.random() * 0.6);
+            tallyNetwork.impact += growthFlow;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += growthFlow;
+
+            tallyNetwork.transactions.push({
+                from: 'growth', to: 'network', amount: growthFlow,
+                narrative: 'Network growth simulation - capacity increased'
+            });
+
+            updateNetworkDisplay();
+
+            // Animate the world map
+            const map = document.getElementById('world-map');
+            map.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+            setTimeout(() => {
+                map.style.background = 'linear-gradient(135deg, #74b9ff, #0984e3)';
+            }, 1000);
+        }
+
+        function expandNetwork() {
+            const expansion = 2 + Math.floor(Math.random() * 4);
+            tallyNetwork.serverCount += expansion;
+            tallyNetwork.impact += expansion * 0.3;
+            tallyNetwork.totalResources++;
+            tallyNetwork.throughput += expansion * 0.3;
+
+            tallyNetwork.transactions.push({
+                from: 'expansion', to: 'network', amount: expansion * 0.3,
+                narrative: `Network expanded by ${expansion} nodes - capacity increased`
+            });
+
+            updateNetworkDisplay();
+
+            // Add multiple nodes to map
+            for (let i = 0; i < expansion; i++) {
+                setTimeout(addNetworkNode, i * 300);
+            }
+        }
+
+        function autoGrowNetwork() {
+            if (tallyNetwork.activated) {
+                const growth = Math.random() > 0.3 ? 1 : 0;
+                if (growth) {
+                    tallyNetwork.serverCount++;
+                    tallyNetwork.nodes += 0.05;
+                    tallyNetwork.throughput += 0.05;
+                    addNetworkNode();
+                }
+                updateNetworkDisplay();
+            }
+        }
+
+        function addNetworkNode() {
+            const map = document.getElementById('world-map');
+            const node = document.createElement('div');
+            node.className = 'network-node';
+
+            // Random position within map
+            const left = 10 + Math.random() * 80;
+            const top = 10 + Math.random() * 80;
+
+            node.style.left = left + '%';
+            node.style.top = top + '%';
+
+            // Random color variation
+            const colors = ['#3498db', '#e74c3c', '#27ae60', '#f39c12', '#9b59b6'];
+            node.style.background = colors[Math.floor(Math.random() * colors.length)];
+            node.style.boxShadow = `0 0 20px ${node.style.background}`;
+
+            map.appendChild(node);
+
+            // Remove after animation
+            setTimeout(() => {
+                if (node.parentNode) {
+                    node.parentNode.removeChild(node);
+                }
+            }, 5000);
+        }
+
+        function animateButton(button, newText) {
+            const originalText = button.textContent;
+            button.textContent = newText;
+            button.style.transform = 'scale(1.1)';
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.transform = 'scale(1)';
+            }, 2000);
+        }
+
+        // Initialize
+        updateNetworkDisplay();
+
+        // Initial animation
+        setTimeout(() => {
+            document.querySelector('header').style.opacity = '1';
+            document.querySelector('header').style.transform = 'translateY(0)';
+        }, 100);
+    </script>
+</body>
+</html>

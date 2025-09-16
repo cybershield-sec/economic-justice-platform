@@ -15,12 +15,30 @@ The main components of the platform are:
 
 ## Building and Running
 
+### C++ Tally Server with Tailscale Replacement
+
+The C++ tally server now includes comprehensive Tailscale replacement functionality with secure peer-to-peer networking:
+
+```bash
+# Build the C++ server with OpenSSL and assembly integration
+make
+
+# Run the server with networking capabilities
+./tally-server
+
+# Run in background mode with networking
+./tally-server --daemon &
+
+# Test network functionality
+./test-network.sh
+```
+
 ### Local Development
 
 To run the project locally, you can use the following commands:
 
 ```bash
-# Using the C++ server (port 8080)
+# Using the C++ server with networking (port 8080)
 npm start
 ```
 
@@ -52,9 +70,11 @@ npm run deploy
 
 ## Development Conventions
 
-*   **Technology Stack:** The project uses HTML5, CSS3, and vanilla JavaScript. There are no external JavaScript dependencies.
-*   **File Structure:** The project is organized into a root directory containing the main HTML files, and an `assets` directory for CSS, JavaScript, and media files.
+*   **Technology Stack:** The project uses HTML5, CSS3, and vanilla JavaScript for the frontend, and C++ with OpenSSL for the backend server with Tailscale replacement networking.
+*   **File Structure:** The project is organized into a root directory containing the main HTML files, C++ server files, and an `assets` directory for CSS, JavaScript, and media files.
 *   **Styling:** The CSS is written directly within the HTML files in `<style>` tags. It uses modern CSS features like Flexbox and Grid.
 *   **JavaScript:** The JavaScript is also written directly within the HTML files in `<script>` tags. It is vanilla JavaScript with no external libraries.
+*   **C++ Server:** The tally server includes secure peer-to-peer networking, encryption, and network tunneling capabilities as a Tailscale replacement.
 *   **Self-Contained Components:** Each HTML file is a self-contained component of the platform, with its own styles and scripts. This makes it easy to understand and maintain each part of the platform individually.
 *   **Progressive Enhancement:** The platform is designed to work without JavaScript, ensuring that the core content is accessible to all users.
+*   **Secure Networking:** The C++ server provides encrypted peer-to-peer communication, network discovery, and secure tunneling without external dependencies.

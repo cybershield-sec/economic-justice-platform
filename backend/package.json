@@ -9,6 +9,9 @@
     "test": "jest",
     "lint": "eslint .",
     "build": "npm run lint && npm test",
+    "migrate": "node db/migrate.js",
+    "migrate:create": "node db/create-migration.js",
+    "migrate:rollback": "node db/migrate.js --rollback",
     "docker:build": "docker build -t economic-justice-api .",
     "docker:run": "docker run -p 3000:3000 economic-justice-api"
   },

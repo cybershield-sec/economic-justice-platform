@@ -177,25 +177,111 @@ class AIParticipantManager {
     return Array.from(this.participants.values()).map(p => p.getInfo());
   }
 
-  // Select participant based on message content
-  selectParticipantForMessage(message) {
+  // Select participant based on message content with enhanced semantic matching
+  selectParticipantForMessage(message, context = {}) {
     const lowerMessage = message.toLowerCase();
-    
-    // Keywords for different participant types
-    if (lowerMessage.includes('policy') || lowerMessage.includes('legislation') || lowerMessage.includes('law')) {
-      return this.getParticipant('policy') || this.getParticipant('legal');
-    } else if (lowerMessage.includes('organize') || lowerMessage.includes('movement') || lowerMessage.includes('campaign')) {
-      return this.getParticipant('activist');
-    } else if (lowerMessage.includes('history') || lowerMessage.includes('past') || lowerMessage.includes('before')) {
-      return this.getParticipant('historian');
-    } else if (lowerMessage.includes('learn') || lowerMessage.includes('understand') || lowerMessage.includes('explain')) {
-      return this.getParticipant('educator');
-    } else if (lowerMessage.includes('legal') || lowerMessage.includes('rights') || lowerMessage.includes('court')) {
-      return this.getParticipant('legal');
-    } else {
-      // Default to economist for general economic topics
+
+    // Comprehensive keyword matching with weighted scoring
+    const keywordPatterns = {
+      economist: {
+        keywords: ['economy', 'economic', 'money', 'bank', 'finance', 'market', 'capital', 'investment', 'debt', 'inflation', 'recession', 'gdp', 'monetary', 'fiscal', 'wealth', 'income', 'profit', 'cost', 'price', 'trade', 'business', 'industry'],
+        weight: 1.0
+      },
+      activist: {
+        keywords: ['organize', 'movement', 'protest', 'action', 'mobilize', 'rally', 'demonstration', 'strike', 'boycott', 'petition', 'campaign', 'solidarity', 'resistance', 'liberation', 'empowerment', 'community', 'grassroots', 'direct action', 'civil disobedience', 'occupation'],
+        weight: 1.0
+      },
+      historian: {
+        keywords: ['history', 'historical', 'past', 'before', 'medieval', 'ancient', 'century', 'era', 'time period', 'tradition', 'precedent', 'legacy', 'heritage', 'archives', 'document', 'record', 'timeline', 'chronology', 'evolution', 'origin', 'roots'],
+        weight: 1.0
+      },
+      policy: {
+        keywords: ['policy', 'legislation', 'law', 'bill', 'act', 'regulation', 'government', 'congress', 'senate', 'parliament', 'administration', 'bureaucracy', 'implementation', 'enforcement', 'compliance', 'governance', 'public policy', 'legislative', 'executive', 'judicial', 'amendment', 'statute'],
+        weight: 1.0
+      },
+      legal: {
+        keywords: ['legal', 'rights', 'court', 'constitution', 'lawsuit', 'justice', 'judge', 'supreme court', 'attorney', 'lawyer', 'advocate', 'defense', 'prosecution', 'trial', 'verdict', 'sentence', 'appeal', 'jurisdiction', 'precedent', 'statute', 'ordinance', 'compliance', 'liability'],
+        weight: 1.0
+      },
+      educator: {
+        keywords: ['learn', 'understand', 'explain', 'teach', 'education', 'concept', 'idea', 'how does', 'what is', 'why', 'meaning', 'definition', 'example', 'analogy', 'metaphor', 'simplify', 'clarify', 'instruct', 'guide', 'mentor', 'pedagogy', 'curriculum', 'syllabus', 'lesson'],
+        weight: 1.0
+      },
+      currency: {
+        keywords: ['currency', 'money', 'bank', 'tally', 'crypto', 'blockchain', 'digital', 'payment', 'exchange', 'transaction', 'ledger', 'accounting', 'value', 'worth', 'price', 'cost', 'payment', 'remittance', 'transfer', 'wallet', 'token', 'coin', 'digital asset', 'decentralized'],
+        weight: 1.0
+      }
+    };
+
+    // Calculate scores for each agent type
+    const scores = {};
+    for (const [agentType, pattern] of Object.entries(keywordPatterns)) {
+      scores[agentType] = 0;
+      for (const keyword of pattern.keywords) {
+        if (lowerMessage.includes(keyword)) {
+          scores[agentType] += pattern.weight;
+          // Bonus for exact matches
+          if (new RegExp(`\\b${keyword}\\b`).test(lowerMessage)) {
+            scores[agentType] += 0.5;
+          }
+        }
+      }
+    }
+
+    // Context-based adjustments
+    if (context.topic) {
+      const topicAdjustments = {
+        'monetary-reform': { economist: 2.0, currency: 1.5, policy: 1.2 },
+        'worker-ownership': { activist: 2.0, economist: 1.5, policy: 1.2 },
+        'universal-basic-income': { economist: 2.0, policy: 1.5, activist: 1.2 },
+        'community-currencies': { currency: 2.0, economist: 1.5, activist: 1.2 },
+        'cooperative-economics': { activist: 2.0, economist: 1.5, policy: 1.2 },
+        'debt-abolition': { activist: 2.0, legal: 1.5, economist: 1.2 },
+        'housing-justice': { activist: 2.0, policy: 1.5, legal: 1.2 },
+        'tally-system': { currency: 2.0, economist: 1.5, policy: 1.2 }
+      };
+
+      if (topicAdjustments[context.topic]) {
+        for (const [agentType, multiplier] of Object.entries(topicAdjustments[context.topic])) {
+          if (scores[agentType]) {
+            scores[agentType] *= multiplier;
+          }
+        }
+      }
+    }
+
+    // Find the agent with the highest score
+    let bestAgent = 'economist';
+    let highestScore = scores.economist || 0;
+
+    for (const [agentType, score] of Object.entries(scores)) {
+      if (score > highestScore) {
+        highestScore = score;
+        bestAgent = agentType;
+      }
+    }
+
+    // If no strong match, use fallback logic
+    if (highestScore < 1.0) {
+      // Check for question patterns
+      if (/^(what|how|why|when|where|who|explain|tell me about)/i.test(message)) {
+        return this.getParticipant('educator') || this.getParticipant('economist');
+      }
+
+      // Check for action-oriented language
+      if (/\b(should|must|need to|have to|ought to)\b/i.test(message)) {
+        return this.getParticipant('activist') || this.getParticipant('policy');
+      }
+
+      // Default fallback based on context
+      if (context.topic === 'legal' || context.topic === 'policy') {
+        return this.getParticipant('policy') || this.getParticipant('legal');
+      }
+
       return this.getParticipant('economist');
     }
+
+    return this.getParticipant(bestAgent);
   }
 
   // Get a random participant (for follow-ups)
